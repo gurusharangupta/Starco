@@ -1,0 +1,11 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: starcoApp
+Bundle-SymbolicName: starcoApp
+Bundle-Version: 1.0.0.qualifier
+Export-Package: com.starco.app.controller,
+ com.starco.app.dao,
+ com.starco.app.daoImpl,
+ com.starco.app.model,
+ com.starco.app.service,
+ com.starco.app.serviceImpl
