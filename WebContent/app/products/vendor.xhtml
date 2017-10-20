@@ -1,0 +1,36 @@
+<f:view xmlns="http://www.w3c.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:ng="http://xmlns.jcp.org/jsf/passthrough"
+	xmlns:p="http://primefaces.org/ui">
+
+	<h:body>
+		<ui:composition template="../common.xhtml">
+			<ui:define name="content">
+
+
+				<h:form>
+					<p:dataTable var="vendor" value="#{vendorController.vendorList}">
+						<p:column headerText="Vendor Name">
+							<h:outputText value="#{vendor.name}" />
+						</p:column>
+
+						<p:column headerText="Vendor Contact">
+							<h:outputText value="#{vendor.contact}" />
+						</p:column>
+
+					</p:dataTable>
+					
+					<p:commandButton value="Add Vendor" action="addvendors" >
+						<f:param name="productId" value="10" />
+					</p:commandButton>
+				</h:form>
+
+
+			</ui:define>
+		</ui:composition>
+
+	</h:body>
+</f:view>
+

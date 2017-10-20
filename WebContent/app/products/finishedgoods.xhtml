@@ -1,0 +1,46 @@
+<f:view xmlns="http://www.w3c.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:ng="http://xmlns.jcp.org/jsf/passthrough"
+	xmlns:p="http://primefaces.org/ui">
+	
+	<h:body> 
+      <ui:composition template = "../common.xhtml">
+         <ui:define name = "content">
+         
+         
+				<h:form>
+					<p:dataTable var="finishedproduct" value="#{productController.listFinishedGoods}">
+    <p:column headerText="Name">
+        <h:outputText value="#{finishedproduct.name}" />
+    </p:column>
+ 
+  <p:column headerText="Price">
+        <h:outputText value="#{finishedproduct.price}" />
+    </p:column>
+    <p:column headerText="Quantity Sold">
+        <h:outputText value="#{finishedproduct.qtySold}" />
+    </p:column>
+ 
+    <p:column headerText="Amount">
+        <h:outputText value="#{finishedproduct.amtValue}" />
+    </p:column>
+    
+     <p:column headerText="GST Rate">
+        <h:outputText value="#{finishedproduct.gstRateApplicable}" />
+    </p:column>
+    
+     <p:column headerText="Total Amount">
+        <h:outputText value="#{finishedproduct.totalAmt}" />
+    </p:column>
+</p:dataTable>
+				</h:form>
+				
+
+         </ui:define>
+      </ui:composition> 
+   
+   </h:body> 
+</f:view>
+

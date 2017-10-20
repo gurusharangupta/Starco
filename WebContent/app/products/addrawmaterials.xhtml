@@ -1,0 +1,64 @@
+<f:view xmlns="http://www.w3c.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:ng="http://xmlns.jcp.org/jsf/passthrough"
+	xmlns:p="http://primefaces.org/ui">
+
+	<h:body>
+		<ui:composition template="../common.xhtml">
+			<ui:define name="content">
+
+
+				<h:form>
+
+					<table style="border: none;">
+
+						<tr>
+
+							<td>Name</td>
+							<td><p:inputText
+									value="#{rawMaterialController.rawMaterials.name}" /></td>
+
+						</tr>
+
+						<tr>
+
+							<td>Vendor</td>
+							<p:selectOneMenu id="vendor" value="#{rawMaterialController.rawMaterials.vendor}"
+								style="width:150px">
+								<p:ajax listener="#{dropdownView.onCountryChange}" update="city" />
+								<f:selectItem itemLabel="Select Country" itemValue=""
+									noSelectionOption="true" />
+								<f:selectItems value="#{vendorController.vendorList}" />
+							</p:selectOneMenu>
+							<td><p:inputText
+									 /></td>
+
+						</tr>
+
+						<tr>
+							<td>Price</td>
+							<td><p:inputText /></td>
+						</tr>
+
+						<tr>
+
+							<td><p:commandButton
+									actionListener="#{rawMaterialController.addRawMaterial()}"
+									action="#{rawMaterialController.showRawMaterial()}"
+									value="Add Vendor" /></td>
+							<td><p:commandButton type="reset" value="Reset" /></td>
+
+						</tr>
+					</table>
+
+				</h:form>
+
+
+			</ui:define>
+		</ui:composition>
+
+	</h:body>
+</f:view>
+

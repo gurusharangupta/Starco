@@ -1,0 +1,50 @@
+<f:view xmlns="http://www.w3c.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:ng="http://xmlns.jcp.org/jsf/passthrough"
+	xmlns:p="http://primefaces.org/ui">
+
+	<h:body>
+		<ui:composition template="../common.xhtml">
+			<ui:define name="content">
+
+
+				<h:form>
+
+					<table style="border: none;">
+
+						<tr>
+
+							<td>Name</td>
+							<td><p:inputText value="#{vendorController.vendor.name}"/></td>
+
+						</tr>
+
+						<tr>
+
+							<td>Contact</td>
+							<td><p:inputText value="#{vendorController.vendor.contact}"/></td>
+
+						</tr>
+						
+						<tr>
+
+							<td><p:commandButton actionListener="#{vendorController.addVendor()}" action="#{vendorController.showVendors()}" value="Add Vendor"/></td>
+							<td><p:commandButton type="reset" value="Reset"/></td>
+
+						</tr>
+
+						
+
+					</table>
+
+				</h:form>
+
+
+			</ui:define>
+		</ui:composition>
+
+	</h:body>
+</f:view>
+

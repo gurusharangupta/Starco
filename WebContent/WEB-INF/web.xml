@@ -6,21 +6,30 @@
 	id="WebApp_ID" version="2.5">
 
 	<display-name>Starco</display-name>
-
+<welcome-file-list>
+    <welcome-file>index.xhtml</welcome-file>
+      <welcome-file>app/common.xhtml</welcome-file>
+</welcome-file-list>
 
 <!-- Add Support for Spring -->
-  <listener>
-	<listener-class>
-		org.springframework.web.context.ContextLoaderListener
-	</listener-class>
-  </listener>
-  <listener>
-	<listener-class>
-		org.springframework.web.context.request.RequestContextListener
-	</listener-class>
-  </listener>
-
-
+ <context-param>
+         <param-name>contextConfigLocation</param-name>
+         <param-value>
+            /WEB-INF/applicationContext.xml
+         </param-value>
+      </context-param>
+       
+      <!-- The Bootstrap listener to start up and shut down Spring's root WebApplicationContext. It is registered to Servlet Container -->
+      <listener>
+        <listener-class>
+            org.springframework.web.context.ContextLoaderListener
+        </listener-class>
+      </listener>
+      <listener>
+        <listener-class>
+            org.springframework.web.context.request.RequestContextListener
+        </listener-class>
+      </listener>
 
 
 	<!-- Change to "Production" when you are ready to deploy -->

@@ -1,0 +1,40 @@
+<f:view xmlns="http://www.w3c.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:ng="http://xmlns.jcp.org/jsf/passthrough"
+	xmlns:p="http://primefaces.org/ui">
+
+	<h:body>
+		<ui:composition template="../common.xhtml">
+			<ui:define name="content">
+
+
+				<h:form>
+					<p:dataTable var="finishedproduct"
+						value="#{rawMaterialController.listRawMaterials}">
+						<p:column headerText="Name">
+							<h:outputText value="#{finishedproduct.name}" />
+						</p:column>
+
+						<p:column headerText="Vendor">
+							<h:outputText value="#{finishedproduct.vendor}" />
+						</p:column>
+						<p:column headerText="Price">
+							<h:outputText value="#{finishedproduct.price}" />
+						</p:column>
+
+					</p:dataTable>
+
+					<p:commandButton value="Add Raw Materials" action="addrawmaterials">
+						<f:param name="productId" value="10" />
+					</p:commandButton>
+				</h:form>
+
+
+			</ui:define>
+		</ui:composition>
+
+	</h:body>
+</f:view>
+
