@@ -21,7 +21,7 @@ public class ProductServiceImpl implements ProductService{
 	private ProductDao productDao;
 	
 	@Override
-	public List<FinishedGoods> listFinishedGoodsProduct() {
+	public List<FinishedGoods> listFinishedGoodsProduct() throws Exception{
 		
 		
 		return productDao.listFinishedGoodsProduct();

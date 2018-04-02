@@ -1,0 +1,126 @@
+<f:view xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:ng="http://xmlns.jcp.org/jsf/passthrough"
+	xmlns:p="http://primefaces.org/ui">
+
+	<h:body>
+		<ui:composition template="../common.xhtml">
+			<ui:define name="content">
+
+
+				<h:form id="currentVendorForm">
+
+					<table style="border: none;">
+
+						<tr>
+
+
+							<td><p:autoComplete id="acSimple" minQueryLength="3"
+									value="#{rawMaterialStarcoController.rawMaterial}"
+									completeMethod="#{rawMaterialStarcoController.completeText}" /></td>
+							<td><p:commandButton
+									action="#{rawMaterialStarcoController.searchRawMaterial()}"
+									value="Search Raw Material" update="rawMaterialDatatable vendorName rawMaterialName vendorPrice vendorMOQ" /></td>
+						</tr>
+					</table>
+
+
+
+					<table style="border: none;margin-top:15px;" >
+					
+					<tr>
+
+							<td>Raw Material</td>
+
+							<td><p:outputLabel id="rawMaterialName"
+									value="#{rawMaterialStarcoController.rawMaterialStarco.name}" /></td>
+
+						</tr>
+						
+						<tr>
+
+							<td>Current Vendor</td>
+
+							<td><p:outputLabel id="vendorName"
+									value="#{rawMaterialStarcoController.rawMaterialStarco.rawMaterials.vendor.name}" /></td>
+
+						</tr>
+
+						<tr>
+
+							<td>Current Price</td>
+
+							<td><p:outputLabel id="vendorPrice"
+									value="#{rawMaterialStarcoController.rawMaterialStarco.price}" /></td>
+
+						</tr>
+
+						<tr>
+
+							<td>MOQ</td>
+
+							<td><p:inputText id="vendorMOQ"
+									value="#{rawMaterialStarcoController.rawMaterialStarco.moq}" /></td>
+
+						</tr>
+					</table>
+
+
+
+
+					<p:dataTable id="rawMaterialDatatable" var="rawmaterials"
+						value="#{rawMaterialStarcoController.listSearchedRawMaterials}"
+						selection="#{rawMaterialStarcoController.rawMaterials}"
+						rowKey="#{rawmaterials.id}">
+						<f:facet name="header">
+				            Raw Materials
+				        </f:facet>
+						<p:column selectionMode="single"
+							style="width:16px;text-align:center" />
+						<p:column headerText="Name">
+							<h:outputText value="#{rawmaterials.name}" />
+						</p:column>
+
+						<p:column headerText="Vendor">
+							<h:outputText value="#{rawmaterials.vendor.name}" />
+						</p:column>
+						<p:column headerText="Price">
+							<h:outputText value="#{rawmaterials.price}" />
+						</p:column>
+
+						<p:column headerText="SP.Solids">
+							<h:outputText value="#{rawmaterials.solids}" />
+						</p:column>
+
+						<p:column headerText="SP. PH%">
+							<h:outputText value="#{rawmaterials.ph}" />
+						</p:column>
+
+						<p:column headerText="SP. Viscosity">
+							<h:outputText value="#{rawmaterials.viscosity}" />
+						</p:column>
+
+						<p:column headerText="SP. Appearance">
+							<h:outputText value="#{rawmaterials.appearance}" />
+						</p:column>
+
+						<p:column headerText="SP. Color">
+							<h:outputText value="#{rawmaterials.color}" />
+						</p:column>
+
+						<f:facet name="footer">
+ 							<p:commandButton process="rawMaterialDatatable @form" value="Update Current Vendor" action="#{rawMaterialStarcoController.updateCurrentVendor()}" />
+						</f:facet>
+					</p:dataTable>
+
+				</h:form>
+
+
+			</ui:define>
+		</ui:composition>
+
+	</h:body>
+</f:view>
+

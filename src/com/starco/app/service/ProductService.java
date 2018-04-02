@@ -7,7 +7,7 @@ import com.starco.app.model.RawMaterials;
 
 public interface ProductService {
 
-	List<FinishedGoods> listFinishedGoodsProduct();
+	List<FinishedGoods> listFinishedGoodsProduct() throws Exception;
 
 	
 

@@ -20,15 +20,22 @@ public class VendorServiceImpl implements VendorService{
 	
 	
 	@Override
-	public List<Vendor> getVendors() {
+	public List<Vendor> getVendors() throws Exception{
 		return vendorDao.getVendor();
 		
 	}
 
 
 	@Override
-	public void addVendor(Vendor vendor) {
+	public void addVendor(Vendor vendor) throws Exception{
 		vendorDao.addVendor(vendor);
+		
+	}
+
+
+	@Override
+	public void deleteVendor(Vendor vendor) {
+		vendorDao.deleteVendor(vendor);
 		
 	}
 

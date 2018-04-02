@@ -4,8 +4,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.annotation.PostConstruct;
+import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
+import javax.faces.context.FacesContext;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -24,10 +26,6 @@ public class ProductController {
 
 	private List<FinishedGoods> listFinishedGoods = new ArrayList<>();
 
-	
-	
-	
-
 	@PostConstruct
 	public void init() {
 		showfinishedGoods();
@@ -35,15 +33,21 @@ public class ProductController {
 	}
 
 	public void showfinishedGoods() {
-		listFinishedGoods = productService.listFinishedGoodsProduct();
+		try {
+			listFinishedGoods = productService.listFinishedGoodsProduct();
+		} catch (Exception e) {
 
+			FacesContext.getCurrentInstance().addMessage(
+					null,
+					new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error",
+							"Error occured while retrieving finished goods"));
+		}
+		System.out.println("Listing Finished Goods");
 	}
 
 	public void addFinishedProduct() {
 
 	}
-
-	
 
 	public List<FinishedGoods> getListFinishedGoods() {
 		return listFinishedGoods;
@@ -52,7 +56,5 @@ public class ProductController {
 	public void setListFinishedGoods(List<FinishedGoods> listFinishedGoods) {
 		this.listFinishedGoods = listFinishedGoods;
 	}
-
-	
 
 }

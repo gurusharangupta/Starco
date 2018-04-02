@@ -1,4 +1,4 @@
-<f:view xmlns="http://www.w3c.org/1999/xhtml"
+<f:view xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:ui="http://java.sun.com/jsf/facelets"
@@ -11,18 +11,39 @@
 
 
 				<h:form>
-					<p:dataTable var="finishedproduct"
+					<p:dataTable var="rawmaterials"
 						value="#{rawMaterialController.listRawMaterials}">
 						<p:column headerText="Name">
-							<h:outputText value="#{finishedproduct.name}" />
+							<h:outputText value="#{rawmaterials.name}" />
 						</p:column>
 
 						<p:column headerText="Vendor">
-							<h:outputText value="#{finishedproduct.vendor}" />
+							<h:outputText value="#{rawmaterials.vendor.name}" />
 						</p:column>
 						<p:column headerText="Price">
-							<h:outputText value="#{finishedproduct.price}" />
+							<h:outputText value="#{rawmaterials.price}" />
 						</p:column>
+						
+						<p:column headerText="SP.Solids">
+							<h:outputText value="#{rawmaterials.solids}" />
+						</p:column>
+						
+						<p:column headerText="SP. PH%">
+							<h:outputText value="#{rawmaterials.ph}" />
+						</p:column>
+						
+						<p:column headerText="SP. Viscosity">
+							<h:outputText value="#{rawmaterials.viscosity}" />
+						</p:column>
+						
+						<p:column headerText="SP. Appearance">
+							<h:outputText value="#{rawmaterials.appearance}" />
+						</p:column>
+						
+						<p:column headerText="SP. Color">
+							<h:outputText value="#{rawmaterials.color}" />
+						</p:column>
+						
 
 					</p:dataTable>
 

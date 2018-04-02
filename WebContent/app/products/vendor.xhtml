@@ -1,4 +1,4 @@
-<f:view xmlns="http://www.w3c.org/1999/xhtml"
+<f:view xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:ui="http://java.sun.com/jsf/facelets"
@@ -11,7 +11,14 @@
 
 
 				<h:form>
-					<p:dataTable var="vendor" value="#{vendorController.vendorList}">
+					<p:dataTable id="vendorDatabase" var="vendor" value="#{vendorController.vendorList}"
+					selection="#{vendorController.vendor}"
+						rowKey="#{vendor.id}">
+					<f:facet name="header">
+				            Vendors
+				        </f:facet>
+						<p:column selectionMode="single"
+							style="width:16px;text-align:center" />
 						<p:column headerText="Vendor Name">
 							<h:outputText value="#{vendor.name}" />
 						</p:column>
@@ -19,12 +26,18 @@
 						<p:column headerText="Vendor Contact">
 							<h:outputText value="#{vendor.contact}" />
 						</p:column>
-
+						
+						<p:column headerText="Vendor Address">
+							<h:outputText value="#{vendor.address}" />
+						</p:column>
+						
+						<p:column headerText="Vendor Rating">
+							<h:outputText value="#{vendor.rating}" />
+						</p:column>
+						<f:facet name="footer">
+ 							<p:commandButton process="vendorDatabase" update="vendorDatabase" value="Delete Vendor" action="#{vendorController.deleteVendor()}" />
+						</f:facet>
 					</p:dataTable>
-					
-					<p:commandButton value="Add Vendor" action="addvendors" >
-						<f:param name="productId" value="10" />
-					</p:commandButton>
 				</h:form>
 
 

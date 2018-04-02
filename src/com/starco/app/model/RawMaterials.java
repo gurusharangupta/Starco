@@ -3,29 +3,58 @@ package com.starco.app.model;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
+import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
+import javax.persistence.UniqueConstraint;
 
 @Entity
-@Table(name="RAW_MATERIAL")
+@Table(name="RAW_MATERIAL",uniqueConstraints = {
+        @UniqueConstraint(columnNames =  {"name", "vendor_id"})})
 public class RawMaterials {
 
 	
 	@Id
 	@GeneratedValue
-	@Column(name="RAW_MATERIAL_ID")
+	@Column
 	private int id;
 	
-	@Column(name="RAW_MATERIALNAME")
+	@Column
 	private String name;
 	
-	@OneToOne(cascade = CascadeType.ALL)
+	
+	@ManyToOne(cascade = CascadeType.PERSIST)
+	@JoinColumn(name="vendor_id",nullable=false)
 	private Vendor vendor;
 	
-	@Column(name="PRICE")
-	private int price;
+	@OneToOne(mappedBy="rawMaterials",cascade= CascadeType.REMOVE)
+	private RawMaterialsStarco rawMaterialsStarco;
+	
+	@Column
+	private float price;
+	
+	@Column
+	private float ph;
+	
+	@Column
+	private float solids;
+	
+	@Column
+	private float viscosity;
+	
+	@Column
+	private String appearance;
+	
+	@Column
+	private String color;
+	
+	@Column
+	private boolean inUseByStarco;
 	
 	
 	public int getId() {
@@ -46,10 +75,53 @@ public class RawMaterials {
 	public void setVendor(Vendor vendor) {
 		this.vendor = vendor;
 	}
-	public int getPrice() {
+	
+	public float getPh() {
+		return ph;
+	}
+	public void setPh(float ph) {
+		this.ph = ph;
+	}
+	public float getSolids() {
+		return solids;
+	}
+	public void setSolids(float solids) {
+		this.solids = solids;
+	}
+	public float getViscosity() {
+		return viscosity;
+	}
+	public void setViscosity(float viscosity) {
+		this.viscosity = viscosity;
+	}
+	public String getAppearance() {
+		return appearance;
+	}
+	public void setAppearance(String appearance) {
+		this.appearance = appearance;
+	}
+	public String getColor() {
+		return color;
+	}
+	public void setColor(String color) {
+		this.color = color;
+	}
+	public void setPrice(float price) {
+		this.price = price;
+	}
+	public float getPrice() {
 		return price;
 	}
-	public void setPrice(int price) {
-		this.price = price;
+	public boolean isInUseByStarco() {
+		return inUseByStarco;
+	}
+	public void setInUseByStarco(boolean inUseByStarco) {
+		this.inUseByStarco = inUseByStarco;
+	}
+	public RawMaterialsStarco getRawMaterialsStarco() {
+		return rawMaterialsStarco;
+	}
+	public void setRawMaterialsStarco(RawMaterialsStarco rawMaterialsStarco) {
+		this.rawMaterialsStarco = rawMaterialsStarco;
 	}
 }

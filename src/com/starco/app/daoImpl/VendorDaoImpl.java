@@ -18,7 +18,7 @@ public class VendorDaoImpl implements VendorDao{
 
 
 	@Override
-	public List<Vendor> getVendor() {
+	public List<Vendor> getVendor() throws Exception{
 		Query query =  sessionFactory.getCurrentSession().createQuery("from Vendor");
 		List<Vendor> vendorList = (List<Vendor>)query.list();
 		return vendorList;
@@ -28,8 +28,16 @@ public class VendorDaoImpl implements VendorDao{
 
 
 	@Override
-	public void addVendor(Vendor vendor) {
+	public void addVendor(Vendor vendor) throws Exception{
 		sessionFactory.getCurrentSession().save(vendor);
+	}
+
+
+
+	@Override
+	public void deleteVendor(Vendor vendor) {
+		sessionFactory.getCurrentSession().delete(vendor);
+		
 	}
 
 }

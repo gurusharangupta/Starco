@@ -1,4 +1,4 @@
-<f:view xmlns="http://www.w3c.org/1999/xhtml"
+<f:view xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:ui="http://java.sun.com/jsf/facelets"
@@ -25,29 +25,57 @@
 						<tr>
 
 							<td>Vendor</td>
-							<p:selectOneMenu id="vendor" value="#{rawMaterialController.rawMaterials.vendor}"
+							
+							<td><p:selectOneMenu id="vendor" value="#{rawMaterialController.rawMaterials.vendor}"
+								converter="vendorConverter"
 								style="width:150px">
-								<p:ajax listener="#{dropdownView.onCountryChange}" update="city" />
-								<f:selectItem itemLabel="Select Country" itemValue=""
-									noSelectionOption="true" />
-								<f:selectItems value="#{vendorController.vendorList}" />
-							</p:selectOneMenu>
-							<td><p:inputText
-									 /></td>
+								
+								<f:selectItems value="#{vendorController.vendorList}" var="vendor"
+                               itemValue="#{vendor}"
+                               itemLabel="#{vendor.name}"/>/>
+							</p:selectOneMenu></td>
 
 						</tr>
 
 						<tr>
 							<td>Price</td>
-							<td><p:inputText /></td>
+							<td><p:inputText value="#{rawMaterialController.rawMaterials.price}"/></td>
 						</tr>
+						
+						
 
+						<tr>
+						<td><B>Specifications</B></td>
+						<td></td>
+						</tr>
+						
+						<tr>
+							<td>PH</td>
+							<td><p:inputText value="#{rawMaterialController.rawMaterials.ph}"/>%</td>
+						</tr>
+						<tr>
+							<td>Solids</td>
+							<td><p:inputText value="#{rawMaterialController.rawMaterials.solids}"/></td>
+						</tr>
+						<tr>
+							<td>Viscosity</td>
+							<td><p:inputText value="#{rawMaterialController.rawMaterials.viscosity}"/>seconds</td>
+						</tr>
+						<tr>
+							<td>Appearance</td>
+							<td><p:inputText value="#{rawMaterialController.rawMaterials.appearance}"/></td>
+						</tr>
+						
+						<tr>
+							<td>Color</td>
+							<td><p:inputText value="#{rawMaterialController.rawMaterials.color}"/></td>
+						</tr>
 						<tr>
 
 							<td><p:commandButton
 									actionListener="#{rawMaterialController.addRawMaterial()}"
-									action="#{rawMaterialController.showRawMaterial()}"
-									value="Add Vendor" /></td>
+									action="#{rawMaterialController.showRawMaterials()}"
+									value="Add Raw Material"/></td>
 							<td><p:commandButton type="reset" value="Reset" /></td>
 
 						</tr>

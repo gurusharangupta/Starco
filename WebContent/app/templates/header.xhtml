@@ -1,24 +1,48 @@
-<f:view xmlns="http://www.w3c.org/1999/xhtml"
+<ui:composition
+xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:ui="http://java.sun.com/jsf/facelets"
 	xmlns:ng="http://xmlns.jcp.org/jsf/passthrough"
 	xmlns:p="http://primefaces.org/ui">
-
-<ui:composition>
 <h:form>
-		<p:tabMenu>
-    <p:menuitem value="Finished Goods" outcome="/app/products/finishedgoods.xhtml" icon="ui-icon-star">
-        <f:param name="i" value="1" />
-    </p:menuitem>
-    <p:menuitem value="Raw Materials" outcome="/app/products/rawmaterials.xhtml" icon="ui-icon-star">
-        <f:param name="i" value="2" />
-    </p:menuitem>
+
+<p:megaMenu orientation="horizontal" style="margin-top:20px">
+    <p:submenu label="Finished Goods" icon="ui-icon-check">
+        <p:column>
+            <p:submenu label="Add">
+                <p:menuitem value="Add Finished Goods" url="/app/products/finishedgoods.xhtml" />
+            </p:submenu>
+        </p:column> 
+    </p:submenu>
     
-    <p:menuitem value="Vendors" outcome="/app/products/vendor.xhtml" actionListener="#{vendorController.showVendors()}" icon="ui-icon-star">
-        <f:param name="i" value="2" />
-    </p:menuitem>
-</p:tabMenu>
+     <p:submenu label="Raw Materials" icon="ui-icon-check">
+        <p:column>
+            <p:submenu label="Show">
+                <p:menuitem value="Show Raw Materials" url="/app/products/rawmaterials.xhtml" action="#{rawMaterialController.showRawMaterials()}"/>
+            </p:submenu>
+            <p:submenu label="Add">
+                <p:menuitem value="Add Raw Materials" url="/app/products/addrawmaterials.xhtml"/>
+            </p:submenu>
+             <p:submenu label="Starco">
+                <p:menuitem value="Add Raw Materials" url="/app/products/addrawmaterialstarco.xhtml"/>
+            </p:submenu>
+        </p:column> 
+    </p:submenu>
+    
+    <p:submenu label="Vendors" icon="ui-icon-check">
+        <p:column>
+            <p:submenu label="Show">
+                <p:menuitem value="Show Vendors" url="/app/products/vendor.xhtml" action="#{vendorController.showVendors()}"/>
+            </p:submenu>
+            <p:submenu label="Add">
+                <p:menuitem value="Add Vendors" url="/app/products/addvendors.xhtml"/>
+            </p:submenu>
+        </p:column> 
+    </p:submenu>
+    </p:megaMenu>
+		<p:messages id="globalMessage" showDetail="true" closable="true" autoUpdate="true" >
+        	
+    	</p:messages>
 </h:form>
 </ui:composition>
-</f:view>

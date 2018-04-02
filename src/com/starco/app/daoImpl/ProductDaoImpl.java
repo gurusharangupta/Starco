@@ -18,7 +18,7 @@ public class ProductDaoImpl implements ProductDao {
 	private SessionFactory sessionFactory;
 
 	@Override
-	public List<FinishedGoods> listFinishedGoodsProduct() {
+	public List<FinishedGoods> listFinishedGoodsProduct() throws Exception{
 		Query query =  sessionFactory.getCurrentSession().createQuery("from FinishedGoods");
 		List<FinishedGoods> finishedGoodsList = (List<FinishedGoods>)query.list();
 		return finishedGoodsList;
