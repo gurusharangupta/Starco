@@ -1,0 +1,160 @@
+<f:view xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:ng="http://xmlns.jcp.org/jsf/passthrough"
+	xmlns:p="http://primefaces.org/ui">
+
+	<h:body>
+		<ui:composition template="../common.xhtml">
+			<ui:define name="content">
+
+
+				<h:form id="finishedGoodsForm">
+
+					<table style="border: none;">
+
+						<tr>
+
+							<td>Name</td>
+							<td><p:inputText
+									value="#{productController.product.productName}" /></td>
+
+						</tr>
+
+
+						<tr>
+							<td>Price</td>
+							<td><p:inputText value="#{productController.product.price}" /></td>
+						</tr>
+
+						<tr>
+							<td>MOQ</td>
+							<td><p:inputText value="#{productController.product.moq}" /></td>
+						</tr>
+					</table>
+					<br />
+					<br />
+					<table>
+						<tr>
+							<td><B>Recipe</B></td>
+							<td></td>
+						</tr>
+						<tr>
+							<td><p:dataTable id="reciepeTable" var="reciepe"
+									value="#{productController.listProductReciepe}">
+									<p:column headerText="Raw Material">
+										<p:selectOneMenu id="rawmaterial"
+											value="#{reciepe.rawMaterialsStarco}"
+											converter="rawMaterialConverter" style="width:150px">
+
+											<f:selectItems
+												value="#{rawMaterialStarcoController.listRawMaterialsStarco}"
+												var="rawMaterialStarco" itemValue="#{rawMaterialStarco}"
+												itemLabel="#{rawMaterialStarco.name}" />/>
+							</p:selectOneMenu>
+									</p:column>
+
+									<p:column headerText="Quantity">
+										<p:inputText value="#{reciepe.quantity}" />
+									
+									</p:column>
+
+									<f:facet name="footer">
+										<p:commandButton icon="ui-icon-plusthick"
+											process="reciepeTable" update="reciepeTable @form"
+											title="Add Reciepe"
+											action="#{productController.addToReciepe()}">
+
+										</p:commandButton>
+										<p:commandButton icon="ui-icon-minusthick"
+											process="reciepeTable" update="reciepeTable finishedGoodsForm"
+											title="Add Reciepe"
+											action="#{productController.removeFromReciepe()}">
+
+										</p:commandButton>
+										<p:commandButton value="Clear Reciepe" process="reciepeTable"
+											update="reciepeTable finishedGoodsForm"
+											action="#{productController.clearReciepeList()}">
+										</p:commandButton>
+										<p:commandButton value="Calculate All Costs" process="finishedGoodsForm"
+											update="finishedGoodsForm"
+											action="#{productController.calculateAllCost()}">
+										</p:commandButton>
+									</f:facet>
+
+								</p:dataTable></td>
+							<td></td>
+						</tr>
+					</table>
+
+					<br />
+					<br />
+
+					<table>
+						<tr>
+							<td>Material Cost</td>
+							<td><p:outputLabel id="materialCost" 
+									value="#{productController.product.materialCost}" />
+									
+									</td>
+						</tr>
+
+						<tr>
+							<td>Cost of Energy/Labor</td>
+							<td><p:inputText id="energyCost"
+									value="#{productController.product.costOfEnergyAndLabor}" /></td>
+						</tr>
+
+						<tr>
+							<td>Cost of Packing</td>
+							<td><p:inputText id="costOfPacking"
+									value="#{productController.product.costOfPacking}" /></td>
+						</tr>
+						<tr>
+							<td><b>Total Cost</b></td>
+							<td><p:outputLabel
+									value="#{productController.product.totalCost}" /></td>
+						</tr>
+
+	<tr>
+							<td><b>Price For Exporter</b></td>
+							<td><p:outputLabel
+									value="#{productController.product.priceForExporter}" /></td>
+						</tr>
+							<tr>
+							<td><b>Price for Dealer</b></td>
+							<td><p:outputLabel
+									value="#{productController.product.priceForDealer}" /></td>
+						</tr>
+							<tr>
+							<td><b>Price for Customer</b></td>
+							<td><p:outputLabel
+									value="#{productController.product.priceForCustomer}" /></td>
+						</tr>
+						<tr>
+						<td><b>Price In Cash</b></td>
+							<td><p:outputLabel
+									value="#{productController.product.priceInCash}" /></td>
+						</tr>
+						<tr>
+
+							<td><p:commandButton
+									actionListener="#{productController.addFinishedProduct()}"
+									action="#{productController.showfinishedGoods()}"
+									value="Add Finished Goods" /> <p:commandButton type="reset"
+									value="Reset" /></td>
+							<td></td>
+
+						</tr>
+					</table>
+
+				</h:form>
+
+
+			</ui:define>
+		</ui:composition>
+
+	</h:body>
+</f:view>
+

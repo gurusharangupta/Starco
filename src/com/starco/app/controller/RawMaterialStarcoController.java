@@ -3,6 +3,7 @@ package com.starco.app.controller;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.annotation.PostConstruct;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
@@ -12,8 +13,10 @@ import org.hibernate.exception.ConstraintViolationException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import com.starco.app.model.ProductRecipe;
 import com.starco.app.model.RawMaterials;
 import com.starco.app.model.RawMaterialsStarco;
+import com.starco.app.model.Vendor;
 import com.starco.app.service.RawMaterialService;
 
 
@@ -26,6 +29,7 @@ public class RawMaterialStarcoController {
 	private RawMaterials rawMaterials = new RawMaterials();
 	private RawMaterialsStarco rawMaterialStarco = new RawMaterialsStarco();
 	private List<RawMaterials> listSearchedRawMaterials = new ArrayList<>();
+	private List<RawMaterialsStarco> listRawMaterialsStarco = new ArrayList<>();
 	private String rawMaterial;
 	
 	@Autowired
@@ -37,8 +41,17 @@ public class RawMaterialStarcoController {
 	@Autowired
 	private RawMaterialController rawMaterialController;
 	
+	@PostConstruct
+	public void init() {
+		fetchRawMaterialStarco();
+
+	}
 	
 	
+	public void fetchRawMaterialStarco(){
+		
+		listRawMaterialsStarco = rawMaterialService.fetchRawMaterialStarco();
+	}
 	
 	public List<String> completeText(String query) {
 		List<String> results = new ArrayList<>();
@@ -82,6 +95,7 @@ public class RawMaterialStarcoController {
 			rawMaterialStarco = rawMaterialService.getCurrentVendorForRawMaterial(rawMaterial);
 			vendorController.showVendors();
 			rawMaterialController.showRawMaterials();
+			fetchRawMaterialStarco();
 			FacesContext.getCurrentInstance().addMessage(
 					null,
 					new FacesMessage(FacesMessage.SEVERITY_INFO, "Info",
@@ -101,6 +115,18 @@ public class RawMaterialStarcoController {
 		}
 		
 		
+	}
+	
+	public RawMaterialsStarco getRawMaterialStarco(Integer id) {
+		if (id == null) {
+			throw new IllegalArgumentException("no id provided");
+		}
+		for (RawMaterialsStarco rawMaterialsStarco : listRawMaterialsStarco) {
+			if (id.equals(rawMaterialsStarco.getId())) {
+				return rawMaterialsStarco;
+			}
+		}
+		return null;
 	}
 
 	public RawMaterials getRawMaterials() {
@@ -136,5 +162,14 @@ public class RawMaterialStarcoController {
 
 	public void setRawMaterialStarco(RawMaterialsStarco rawMaterialStarco) {
 		this.rawMaterialStarco = rawMaterialStarco;
+	}
+
+	public List<RawMaterialsStarco> getListRawMaterialsStarco() {
+		return listRawMaterialsStarco;
+	}
+
+	public void setListRawMaterialsStarco(
+			List<RawMaterialsStarco> listRawMaterialsStarco) {
+		this.listRawMaterialsStarco = listRawMaterialsStarco;
 	}
 }

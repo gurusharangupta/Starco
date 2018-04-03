@@ -33,6 +33,10 @@ public class RawMaterialsStarco {
 	@JoinColumn(name="rawMaterials_id")
 	private RawMaterials rawMaterials;
 	
+	@OneToOne(cascade = CascadeType.REMOVE, fetch = FetchType.EAGER)
+	@JoinColumn(name="productrecipe_id")
+	private ProductRecipe productRecipe;
+	
 	
 	
 	@Column

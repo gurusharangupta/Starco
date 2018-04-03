@@ -62,4 +62,10 @@ public class RawMaterialServiceImpl implements RawMaterialService {
 		
 	}
 
+	@Override
+	public List<RawMaterialsStarco> fetchRawMaterialStarco() {
+		// TODO Auto-generated method stub
+		return rawMaterialDao.fetchRawMaterialStarco();
+	}
+
 }

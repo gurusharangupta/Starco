@@ -53,9 +53,6 @@ public class RawMaterials {
 	@Column
 	private String color;
 	
-	@Column
-	private boolean inUseByStarco;
-	
 	
 	public int getId() {
 		return id;
@@ -111,12 +108,6 @@ public class RawMaterials {
 	}
 	public float getPrice() {
 		return price;
-	}
-	public boolean isInUseByStarco() {
-		return inUseByStarco;
-	}
-	public void setInUseByStarco(boolean inUseByStarco) {
-		this.inUseByStarco = inUseByStarco;
 	}
 	public RawMaterialsStarco getRawMaterialsStarco() {
 		return rawMaterialsStarco;

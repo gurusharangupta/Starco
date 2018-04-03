@@ -85,6 +85,13 @@ public class RawMaterialDaoImpl implements RawMaterialDao{
 		
 	}
 
+	@Override
+	public List<RawMaterialsStarco> fetchRawMaterialStarco() {
+		Query query =  sessionFactory.getCurrentSession().createQuery("from RawMaterialsStarco");
+		List<RawMaterialsStarco> rawMaterialsStarcoList = (List<RawMaterialsStarco>)query.list();
+		return rawMaterialsStarcoList;
+	}
+
 	
 	
 	

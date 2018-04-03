@@ -18,21 +18,21 @@ public class Vendor {
 	
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
-	@Column(name="VENDOR_ID")
+	@Column
 	private int id;
 	
 	
-	@Column(name="VENDOR_NAME")
+	@Column
 	private String name;
 	
-	@Column(name="VENDOR_CONTACT")
+	@Column
 	private String contact;
 
 	
-	@Column(name="VENDOR_ADDRESS")
+	@Column
 	private String address;
 
-	@Column(name="VENDOR_RATING")
+	@Column
 	private int rating;
 	
 	@OneToMany(mappedBy="vendor",cascade=CascadeType.ALL)

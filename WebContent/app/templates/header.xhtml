@@ -10,8 +10,11 @@ xmlns="http://www.w3.org/1999/xhtml"
 <p:megaMenu orientation="horizontal" style="margin-top:20px">
     <p:submenu label="Finished Goods" icon="ui-icon-check">
         <p:column>
+          <p:submenu label="Show">
+                <p:menuitem value="Show Finished Goods" url="/app/products/finishedgoods.xhtml" />
+            </p:submenu>
             <p:submenu label="Add">
-                <p:menuitem value="Add Finished Goods" url="/app/products/finishedgoods.xhtml" />
+                <p:menuitem value="Add Finished Goods" url="/app/products/addfinishedgoods.xhtml" />
             </p:submenu>
         </p:column> 
     </p:submenu>
