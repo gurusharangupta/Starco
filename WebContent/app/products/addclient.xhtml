@@ -18,42 +18,56 @@
 
 							<td>Name</td>
 							<td><p:inputText
-									value="#{productController.product.productName}" /></td>
+									value="#{clientController.client.name}" /></td>
 
 						</tr>
 
 
 						<tr>
-							<td>Price</td>
-							<td><p:inputText value="#{productController.product.price}" /></td>
+							<td>Notes</td>
+							<td><p:inputText value="#{clientController.client.notes}" /></td>
 						</tr>
 
 						<tr>
-							<td>MOQ</td>
-							<td><p:inputText value="#{productController.product.moq}" /></td>
+							<td>OGS</td>
+							<td><p:inputText value="#{clientController.client.ogs}" /></td>
 						</tr>
 					</table>
 					<br />
 					<br />
 					<table>
 						<tr>
-							<td><B>Recipe</B></td>
+							<td><B>ADD PRODUCT</B></td>
 							<td></td>
 						</tr>
 						<tr>
-							<td><p:dataTable id="reciepeTable" var="reciepe"
-									value="#{productController.listProductReciepe}">
-									<p:column headerText="Raw Material">
-										<p:selectOneMenu id="rawmaterial"
-											value="#{reciepe.rawMaterialsStarco}"
-											converter="rawMaterialConverter" style="width:150px">
+							<td><p:dataTable id="productTable" var="products"
+									value="#{clientController.clientProductStarcoList}">
+									<p:column headerText="Product">
+										<p:selectOneMenu
+											value="#{products.product.productName}"
+											converter="productConverter" style="width:150px">
 
 											<f:selectItems
-												value="#{rawMaterialStarcoController.listRawMaterialsStarco}"
-												var="rawMaterialStarco" itemValue="#{rawMaterialStarco}"
-												itemLabel="#{rawMaterialStarco.name}" />/>
+												value="#{productController.listFinishedGoods}"
+												var="product" itemValue="#{product}"
+												itemLabel="#{product.name}" />/>
 							</p:selectOneMenu>
 									</p:column>
+									
+										<p:column headerText="Type Of Packing">
+										<p:selectOneMenu
+											value="#{products.packing.name}"
+											converter="packingConverter" style="width:150px">
+
+											<f:selectItems
+												value="#{productController.listFinishedGoods}"
+												var="product" itemValue="#{product}"
+												itemLabel="#{product.name}" />/>
+							</p:selectOneMenu>
+									</p:column>
+									
+									
 
 									<p:column headerText="Quantity">
 										<p:inputText value="#{reciepe.quantity}" />
@@ -92,13 +106,7 @@
 					<br />
 
 					<table>
-						<tr>
-							<td>Material Cost</td>
-							<td><p:outputLabel id="materialCost" 
-									value="#{productController.product.materialCost}" />
-									
-									</td>
-						</tr>
+						
 
 						<tr>
 							<td>Cost of Energy/Labor</td>
@@ -106,37 +114,6 @@
 									value="#{productController.product.costOfEnergyAndLabor}" /></td>
 						</tr>
 
-						<tr>
-							<td>Cost of Packing</td>
-							<td><p:inputText id="costOfPacking"
-									value="#{productController.product.costOfPacking}" /></td>
-						</tr>
-						<tr>
-							<td><b>Total Cost</b></td>
-							<td><p:outputLabel
-									value="#{productController.product.totalCost}" /></td>
-						</tr>
-
-	<tr>
-							<td><b>Price For Exporter</b></td>
-							<td><p:outputLabel
-									value="#{productController.product.priceForExporter}" /></td>
-						</tr>
-							<tr>
-							<td><b>Price for Dealer</b></td>
-							<td><p:outputLabel
-									value="#{productController.product.priceForDealer}" /></td>
-						</tr>
-							<tr>
-							<td><b>Price for Customer</b></td>
-							<td><p:outputLabel
-									value="#{productController.product.priceForCustomer}" /></td>
-						</tr>
-						<tr>
-						<td><b>Price In Cash</b></td>
-							<td><p:outputLabel
-									value="#{productController.product.priceInCash}" /></td>
-						</tr>
 						<tr>
 
 							<td><p:commandButton

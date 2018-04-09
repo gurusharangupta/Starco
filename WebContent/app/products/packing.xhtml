@@ -1,0 +1,49 @@
+<f:view xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:ng="http://xmlns.jcp.org/jsf/passthrough"
+	xmlns:p="http://primefaces.org/ui">
+
+	<h:body>
+		<ui:composition template="../common.xhtml">
+			<ui:define name="content">
+
+
+				<h:form>
+					<p:dataTable id="packingDatabase" var="packing" value="#{packingController.packingList}"
+					selection="#{packingController.packing}"
+						rowKey="#{packing.id}">
+					<f:facet name="header">
+				           Type Of Packing
+				        </f:facet>
+						<p:column selectionMode="single"
+							style="width:16px;text-align:center" />
+						<p:column headerText="Packing Name">
+							<h:outputText value="#{packing.name}" />
+						</p:column>
+
+						<p:column headerText="Weight">
+							<h:outputText value="#{packing.weight}" />
+						</p:column>
+						
+						<p:column headerText="Price">
+							<h:outputText value="#{packing.price}" />
+						</p:column>
+						
+						<p:column headerText="Price/Kg">
+							<h:outputText value="#{packing.pricePerKg}" />
+						</p:column>
+						<f:facet name="footer">
+ 							<p:commandButton process="packingDatabase" update="packingDatabase" value="Delete Packing" />
+						</f:facet>
+					</p:dataTable>
+				</h:form>
+
+
+			</ui:define>
+		</ui:composition>
+
+	</h:body>
+</f:view>
+

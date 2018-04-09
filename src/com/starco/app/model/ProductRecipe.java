@@ -3,6 +3,7 @@ package com.starco.app.model;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
@@ -19,13 +20,14 @@ public class ProductRecipe {
 	@Column
 	private int id;
 	
-	@OneToOne(mappedBy="productRecipe",cascade = CascadeType.PERSIST)
+	@ManyToOne(cascade = CascadeType.REMOVE,fetch=FetchType.EAGER)
+	@JoinColumn(name="rawmaterialstarco_id")
 	private RawMaterialsStarco rawMaterialsStarco;
 	
 	@Column
 	private int quantity;
 	
-	@ManyToOne(cascade= CascadeType.PERSIST)
+	@ManyToOne(cascade = CascadeType.REMOVE,fetch=FetchType.EAGER)
 	@JoinColumn(name="product_id")
 	private Product product;
 

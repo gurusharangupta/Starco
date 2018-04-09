@@ -13,27 +13,24 @@
 				<h:form>
 					<p:dataTable var="finishedproduct" value="#{productController.listFinishedGoods}">
     <p:column headerText="Name">
-        <h:outputText value="#{finishedproduct.name}" />
+        <h:outputText value="#{finishedproduct.productName}" />
     </p:column>
  
   <p:column headerText="Price">
         <h:outputText value="#{finishedproduct.price}" />
     </p:column>
-    <p:column headerText="Quantity Sold">
-        <h:outputText value="#{finishedproduct.qtySold}" />
+    <p:column headerText="MOQ">
+        <h:outputText value="#{finishedproduct.moq}" />
     </p:column>
  
-    <p:column headerText="Amount">
-        <h:outputText value="#{finishedproduct.amtValue}" />
+    <p:column headerText="Total Cost">
+        <h:outputText value="#{finishedproduct.totalCost}" />
     </p:column>
     
-     <p:column headerText="GST Rate">
-        <h:outputText value="#{finishedproduct.gstRateApplicable}" />
+     <p:column headerText="Price For Customer">
+        <h:outputText value="#{finishedproduct.priceForCustomer}" />
     </p:column>
     
-     <p:column headerText="Total Amount">
-        <h:outputText value="#{finishedproduct.totalAmt}" />
-    </p:column>
 </p:dataTable>
 				</h:form>
 				

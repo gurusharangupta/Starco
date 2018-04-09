@@ -5,6 +5,7 @@ import java.util.Set;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
@@ -28,8 +29,12 @@ public class Product {
 	@Column
 	private int moq;
 	
-	@OneToMany(mappedBy="product",cascade=CascadeType.ALL)
+	@OneToMany(mappedBy="product",cascade=CascadeType.ALL,fetch=FetchType.EAGER)
 	private Set<ProductRecipe> productRecipe;
+	
+	@OneToMany(mappedBy="product",cascade=CascadeType.ALL,fetch=FetchType.EAGER)
+	private Set<ClientProductStarco> clientProductStarcoList;
+	
 	
 	@Column
 	private float materialCost;
@@ -136,6 +141,13 @@ public class Product {
 	}
 	public void setPriceInCash(float priceInCash) {
 		this.priceInCash = priceInCash;
+	}
+	public Set<ClientProductStarco> getClientProductStarcoList() {
+		return clientProductStarcoList;
+	}
+	public void setClientProductStarcoList(
+			Set<ClientProductStarco> clientProductStarcoList) {
+		this.clientProductStarcoList = clientProductStarcoList;
 	}
 	
 }

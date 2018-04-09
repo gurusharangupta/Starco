@@ -1,5 +1,7 @@
 package com.starco.app.model;
 
+import java.util.List;
+
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -7,6 +9,7 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
@@ -33,9 +36,8 @@ public class RawMaterialsStarco {
 	@JoinColumn(name="rawMaterials_id")
 	private RawMaterials rawMaterials;
 	
-	@OneToOne(cascade = CascadeType.REMOVE, fetch = FetchType.EAGER)
-	@JoinColumn(name="productrecipe_id")
-	private ProductRecipe productRecipe;
+	@OneToMany(mappedBy="rawMaterialsStarco",cascade = CascadeType.REMOVE)
+	private List<ProductRecipe> productRecipe;
 	
 	
 	
@@ -80,6 +82,14 @@ public class RawMaterialsStarco {
 
 	public void setPrice(float price) {
 		this.price = price;
+	}
+
+	public List<ProductRecipe> getProductRecipe() {
+		return productRecipe;
+	}
+
+	public void setProductRecipe(List<ProductRecipe> productRecipe) {
+		this.productRecipe = productRecipe;
 	}
 
 	

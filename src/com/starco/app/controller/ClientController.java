@@ -10,22 +10,27 @@ import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
-import javax.faces.event.ValueChangeEvent;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import com.starco.app.model.Packing;
+import com.starco.app.model.Client;
+import com.starco.app.model.ClientProductStarco;
 import com.starco.app.model.Product;
 import com.starco.app.model.ProductRecipe;
-import com.starco.app.model.RawMaterials;
 import com.starco.app.service.ProductService;
 
-@ManagedBean(name = "productController")
+
+
+@ManagedBean(name = "clientController")
 @ViewScoped
 @Component
-public class ProductController {
-
+public class ClientController {
+	
+	private Client client = new Client();
+	
+	private List<ClientProductStarco> clientProductStarcoList = new ArrayList<ClientProductStarco>();
+	
 	@Autowired
 	private ProductService productService;
 
