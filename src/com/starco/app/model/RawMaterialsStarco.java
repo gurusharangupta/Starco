@@ -26,12 +26,6 @@ public class RawMaterialsStarco {
 	@Column
 	private int id;
 	
-	@Column(unique=true)
-	private String name;
-	
-	@Column
-	private float price;
-	
 	@OneToOne(cascade = CascadeType.PERSIST, fetch = FetchType.EAGER)
 	@JoinColumn(name="rawMaterials_id")
 	private RawMaterials rawMaterials;
@@ -66,22 +60,6 @@ public class RawMaterialsStarco {
 
 	public void setMoq(int moq) {
 		this.moq = moq;
-	}
-
-	public String getName() {
-		return name;
-	}
-
-	public void setName(String name) {
-		this.name = name;
-	}
-
-	public float getPrice() {
-		return price;
-	}
-
-	public void setPrice(float price) {
-		this.price = price;
 	}
 
 	public List<ProductRecipe> getProductRecipe() {

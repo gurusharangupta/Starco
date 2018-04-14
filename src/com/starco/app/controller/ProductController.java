@@ -56,13 +56,20 @@ public class ProductController {
 		System.out.println("Listing Finished Goods");
 	}
 
+	public void updateFinishedProduct(Product product) throws Exception{
+		
+			productService.updateProduct(product);
+		
+	}
+	
+	
 	public void addFinishedProduct() {
 		calculateAllCost();
 		boolean error=false;
 		for(int i=0;i<listProductReciepe.size()-1;i++){
 			listProductReciepe.get(i).setProduct(product);
 			for(int j=i+1;j<=listProductReciepe.size()-1;j++){
-				if(listProductReciepe.get(i).getRawMaterialsStarco().getName().equals(listProductReciepe.get(j).getRawMaterialsStarco().getName())){
+				if(listProductReciepe.get(i).getRawMaterialsStarco().getRawMaterials().getName().equals(listProductReciepe.get(j).getRawMaterialsStarco().getRawMaterials().getName())){
 					FacesContext.getCurrentInstance().addMessage(
 							null,
 							new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error",
@@ -122,7 +129,7 @@ public class ProductController {
 	public void calculateAllCost(){
 		float reciepeCost = 0;
 		for(ProductRecipe productRecipe: listProductReciepe){
-			reciepeCost+= productRecipe.getRawMaterialsStarco()
+			reciepeCost+= productRecipe.getRawMaterialsStarco().getRawMaterials()
 					.getPrice() * productRecipe.getQuantity();
 		}
 		product.setMaterialCost(reciepeCost);
@@ -141,6 +148,17 @@ public class ProductController {
 		
 	}
 
+	public Product getProduct(Integer id) {
+		if (id == null) {
+			throw new IllegalArgumentException("no id provided");
+		}
+		for (Product product : listFinishedGoods) {
+			if (id.equals(product.getId())) {
+				return product;
+			}
+		}
+		return null;
+	}
 	
 
 	public Product getProduct() {

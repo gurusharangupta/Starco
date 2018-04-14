@@ -12,5 +12,7 @@ public interface ProductDao {
 
 	void addFinishedProduct(Product product) throws Exception;
 
+	void updateProduct(Product product) throws Exception;
+
 
 }

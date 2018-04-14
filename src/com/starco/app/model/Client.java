@@ -1,6 +1,7 @@
 package com.starco.app.model;
 
 import java.io.Serializable;
+import java.util.List;
 import java.util.Set;
 
 import javax.persistence.CascadeType;
@@ -30,7 +31,10 @@ public class Client implements Serializable{
 	private String name;
 	
 	@OneToMany(mappedBy="client",cascade=CascadeType.ALL,fetch=FetchType.EAGER)
-	private Set<ClientProductStarco> clientProductList;
+	private List<ClientProductStarco> clientProductList;
+	
+	@OneToMany(mappedBy="client",cascade=CascadeType.ALL,fetch=FetchType.EAGER)
+	private List<Sales> salesList;
 	
 	@Column
 	private String notes;
@@ -54,13 +58,6 @@ public class Client implements Serializable{
 		this.name = name;
 	}
 
-	public Set<ClientProductStarco> getClientProductList() {
-		return clientProductList;
-	}
-
-	public void setClientProductList(Set<ClientProductStarco> clientProductList) {
-		this.clientProductList = clientProductList;
-	}
 
 	public String getNotes() {
 		return notes;
@@ -76,6 +73,22 @@ public class Client implements Serializable{
 
 	public void setOgs(boolean ogs) {
 		this.ogs = ogs;
+	}
+
+	public List<ClientProductStarco> getClientProductList() {
+		return clientProductList;
+	}
+
+	public void setClientProductList(List<ClientProductStarco> clientProductList) {
+		this.clientProductList = clientProductList;
+	}
+
+	public List<Sales> getSalesList() {
+		return salesList;
+	}
+
+	public void setSalesList(List<Sales> salesList) {
+		this.salesList = salesList;
 	}
 	
 	

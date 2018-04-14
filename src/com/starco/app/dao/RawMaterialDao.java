@@ -21,6 +21,8 @@ public interface RawMaterialDao {
 
 	RawMaterialsStarco getCurrentVendorForRawMaterial(String rawMaterial) throws Exception;
 
-	List<RawMaterialsStarco> fetchRawMaterialStarco();
+	List<RawMaterialsStarco> fetchRawMaterialStarco()throws Exception;
+
+	void updateRawMaterial(RawMaterials rawMaterials)throws ConstraintViolationException,Exception;
 
 }

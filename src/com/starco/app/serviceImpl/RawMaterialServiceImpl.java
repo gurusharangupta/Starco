@@ -47,8 +47,6 @@ public class RawMaterialServiceImpl implements RawMaterialService {
 	public void updateCurrentVendorForRawMaterial(RawMaterials rawMaterials,int moq)
 			throws ConstraintViolationException,Exception {
 		RawMaterialsStarco rawMaterialsStarco = new  RawMaterialsStarco();
-		rawMaterialsStarco.setName(rawMaterials.getName());
-		rawMaterialsStarco.setPrice(rawMaterials.getPrice());
 		rawMaterialsStarco.setRawMaterials(rawMaterials);
 		rawMaterialsStarco.setMoq(moq);
 		
@@ -63,9 +61,14 @@ public class RawMaterialServiceImpl implements RawMaterialService {
 	}
 
 	@Override
-	public List<RawMaterialsStarco> fetchRawMaterialStarco() {
-		// TODO Auto-generated method stub
+	public List<RawMaterialsStarco> fetchRawMaterialStarco() throws Exception{
 		return rawMaterialDao.fetchRawMaterialStarco();
+	}
+
+	@Override
+	public void updateRawMaterial(RawMaterials rawMaterials) throws ConstraintViolationException,Exception{
+		rawMaterialDao.updateRawMaterial(rawMaterials);
+		
 	}
 
 }

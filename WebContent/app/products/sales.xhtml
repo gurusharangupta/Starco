@@ -11,21 +11,19 @@
 
 
 				<h:form>
-					<p:dataTable id="clientDatabase" var="client"
-						value="#{clientController.clientList}">
-						<p:column headerText="Name">
-							<h:outputText value="#{client.name}" />
+					<p:dataTable id="salesDatabase" var="sales"
+						value="#{salesController.salesList}">
+						<p:column headerText="Client Name">
+							<h:outputText value="#{sales.client.name}" />
 						</p:column>
 
-						<p:column headerText="Notes">
-							<h:outputText value="#{client.notes}" />
+						<p:column headerText="Product Name">
+							<h:outputText value="#{sales.clientProductStarco.product.productName}" />
 						</p:column>
-						<p:column headerText="OGS">
-							<h:outputText value="#{client.ogs}" />
-						</p:column>
+						
+						
 						<f:facet name="footer">
-							<p:commandButton update="clientDatabase" value="Refresh List"
-								action="#{clientController.fetchClients()}" />
+							
 						</f:facet>
 					</p:dataTable>
 				</h:form>

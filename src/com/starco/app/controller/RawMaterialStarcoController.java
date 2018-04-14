@@ -50,7 +50,15 @@ public class RawMaterialStarcoController {
 	
 	public void fetchRawMaterialStarco(){
 		
-		listRawMaterialsStarco = rawMaterialService.fetchRawMaterialStarco();
+		try {
+			listRawMaterialsStarco = rawMaterialService.fetchRawMaterialStarco();
+		} catch (Exception e) {
+			FacesContext.getCurrentInstance().addMessage(
+					null,
+					new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error",
+							"Error occured while fetching raw materials"));
+			e.printStackTrace();
+		}
 	}
 	
 	public List<String> completeText(String query) {
@@ -69,8 +77,10 @@ public class RawMaterialStarcoController {
 	
 	public void searchRawMaterial(){
 		try {
-			listSearchedRawMaterials = rawMaterialService.getNamedRawMaterialList(rawMaterial);
 			rawMaterialStarco = rawMaterialService.getCurrentVendorForRawMaterial(rawMaterial);
+			rawMaterials = rawMaterialStarco.getRawMaterials();
+			listSearchedRawMaterials = rawMaterialService.getNamedRawMaterialList(rawMaterial);
+			
 			if(listSearchedRawMaterials.size() == 0){
 				FacesContext.getCurrentInstance().addMessage(
 						null,

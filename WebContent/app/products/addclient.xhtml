@@ -10,12 +10,10 @@
 			<ui:define name="content">
 
 
-				<h:form id="finishedGoodsForm">
+				<h:form id="clientForm">
 
 					<table style="border: none;">
-
 						<tr>
-
 							<td>Name</td>
 							<td><p:inputText
 									value="#{clientController.client.name}" /></td>
@@ -25,12 +23,12 @@
 
 						<tr>
 							<td>Notes</td>
-							<td><p:inputText value="#{clientController.client.notes}" /></td>
+							<td><p:inputTextarea rows="5" cols="40" value="#{clientController.client.notes}" /></td>
 						</tr>
 
 						<tr>
 							<td>OGS</td>
-							<td><p:inputText value="#{clientController.client.ogs}" /></td>
+							<td><p:selectBooleanCheckbox value="#{clientController.client.ogs}" /></td>
 						</tr>
 					</table>
 					<br />
@@ -41,59 +39,55 @@
 							<td></td>
 						</tr>
 						<tr>
-							<td><p:dataTable id="productTable" var="products"
+							<td><p:dataTable id="productTable" var="productsStarco"
 									value="#{clientController.clientProductStarcoList}">
 									<p:column headerText="Product">
 										<p:selectOneMenu
-											value="#{products.product.productName}"
+											value="#{productsStarco.product}"
 											converter="productConverter" style="width:150px">
 
 											<f:selectItems
 												value="#{productController.listFinishedGoods}"
 												var="product" itemValue="#{product}"
-												itemLabel="#{product.name}" />/>
+												itemLabel="#{product.productName}" />
 							</p:selectOneMenu>
 									</p:column>
 									
 										<p:column headerText="Type Of Packing">
 										<p:selectOneMenu
-											value="#{products.packing.name}"
+											value="#{productsStarco.packing}"
 											converter="packingConverter" style="width:150px">
 
 											<f:selectItems
-												value="#{productController.listFinishedGoods}"
-												var="product" itemValue="#{product}"
-												itemLabel="#{product.name}" />/>
+												value="#{packingController.packingList}"
+												var="packing" itemValue="#{packing}"
+												itemLabel="#{packing.name}" />/>
 							</p:selectOneMenu>
 									</p:column>
 									
 									
 
-									<p:column headerText="Quantity">
-										<p:inputText value="#{reciepe.quantity}" />
+									<p:column headerText="Price">
+										<p:inputText value="#{productsStarco.price}" />
 									
 									</p:column>
 
 									<f:facet name="footer">
-										<p:commandButton icon="ui-icon-plusthick"
-											process="finishedGoodsForm" update="finishedGoodsForm"
+											<p:commandButton icon="ui-icon-plusthick"
+											process="clientForm" update="clientForm"
 											title="Add Reciepe"
-											action="#{productController.addToReciepe()}">
+											action="#{clientController.addToReciepe()}">
 
 										</p:commandButton>
 										<p:commandButton icon="ui-icon-minusthick"
-											process="finishedGoodsForm" update="finishedGoodsForm"
+											process="clientForm" update="clientForm"
 											title="Add Reciepe"
-											action="#{productController.removeFromReciepe()}">
+											action="#{clientController.removeFromReciepe()}">
 
 										</p:commandButton>
-										<p:commandButton value="Clear Reciepe" process="finishedGoodsForm"
-											update="finishedGoodsForm"
-											action="#{productController.clearReciepeList()}">
-										</p:commandButton>
-										<p:commandButton value="Calculate All Costs" process="finishedGoodsForm"
-											update="finishedGoodsForm"
-											action="#{productController.calculateAllCost()}">
+										<p:commandButton value="Clear Products" process="clientForm"
+											update="clientForm"
+											action="#{clientController.clearProductStarcoList()}">
 										</p:commandButton>
 									</f:facet>
 
@@ -106,20 +100,13 @@
 					<br />
 
 					<table>
-						
-
-						<tr>
-							<td>Cost of Energy/Labor</td>
-							<td><p:inputText id="energyCost"
-									value="#{productController.product.costOfEnergyAndLabor}" /></td>
-						</tr>
 
 						<tr>
 
 							<td><p:commandButton
-									actionListener="#{productController.addFinishedProduct()}"
-									action="#{productController.showfinishedGoods()}" update="finishedGoodsForm"
-									value="Add Finished Goods" /> <p:commandButton type="reset"
+									actionListener="#{clientController.addClient()}"
+									action="#{clientController.fetchClients()}" update="clientForm"
+									value="Add Client" /> <p:commandButton type="reset"
 									value="Reset" /></td>
 							<td></td>
 

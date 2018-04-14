@@ -9,29 +9,36 @@ import org.springframework.stereotype.Service;
 
 import com.starco.app.dao.ClientDao;
 import com.starco.app.dao.PackingDao;
+import com.starco.app.dao.SalesDao;
 import com.starco.app.model.Client;
 import com.starco.app.model.Packing;
+import com.starco.app.model.Sales;
 import com.starco.app.service.ClientService;
 import com.starco.app.service.PackingService;
+import com.starco.app.service.SalesService;
 
 @Service
 @Transactional
-public class ClientServiceImpl implements ClientService {
+public class SalesServiceImpl implements SalesService {
 
 	
 	@Autowired
-	private ClientDao clientDao;
+	private SalesDao salesDao;
 
 	@Override
-	public void addClient(Client client) throws Exception {
-		clientDao.addClient(client);
+	public void addSales(Sales sales) throws Exception {
+		salesDao.addSales(sales);
 		
 	}
 
 	@Override
-	public List<Client> clientList() throws Exception {
-		return clientDao.clientList();
+	public List<Sales> fetchSales() throws Exception {
+		
+		return salesDao.fetchSales();
 	}
+
+	
+	
 	
 	
 

@@ -62,13 +62,15 @@ public class RawMaterialDaoImpl implements RawMaterialDao{
 	@Override
 	public void updateCurrentVendorForRawMaterial(
 			RawMaterialsStarco rawMaterialsStarco) throws ConstraintViolationException,Exception{
-		RawMaterialsStarco currentRawMaterialStarco =  getCurrentVendorForRawMaterial(rawMaterialsStarco.getName());
-		if(currentRawMaterialStarco.getName()!=null && !currentRawMaterialStarco.getName().isEmpty()){
-			sessionFactory.getCurrentSession().delete(currentRawMaterialStarco);
+		RawMaterialsStarco currentRawMaterialStarco =  getCurrentVendorForRawMaterial(rawMaterialsStarco.getRawMaterials().getName());
+		if(currentRawMaterialStarco.getRawMaterials()!=null && currentRawMaterialStarco.getRawMaterials().getName()!=null && !currentRawMaterialStarco.getRawMaterials().getName().isEmpty()){
+			currentRawMaterialStarco.setMoq(rawMaterialsStarco.getMoq());
+			currentRawMaterialStarco.setRawMaterials(rawMaterialsStarco.getRawMaterials());
+			sessionFactory.getCurrentSession().update(currentRawMaterialStarco);
 			sessionFactory.getCurrentSession().flush();
-		}
+		}else{
 		sessionFactory.getCurrentSession().save(rawMaterialsStarco);
-		
+		}
 		
 	}
 
@@ -76,8 +78,10 @@ public class RawMaterialDaoImpl implements RawMaterialDao{
 	public RawMaterialsStarco getCurrentVendorForRawMaterial(String rawMaterial)throws Exception {
 		Criteria criteria = sessionFactory.getCurrentSession().createCriteria(RawMaterialsStarco.class);
 		RawMaterialsStarco rawMaterialStarco = new RawMaterialsStarco();
+		  
 		Criterion c1 = Restrictions.like("name", rawMaterial,MatchMode.EXACT);
-		criteria.add(c1);
+		criteria.createCriteria("rawMaterials")
+        .add(c1);
 		if(criteria.list().size()!=0){
 		rawMaterialStarco = (RawMaterialsStarco)criteria.list().get(0);
 		}
@@ -86,10 +90,16 @@ public class RawMaterialDaoImpl implements RawMaterialDao{
 	}
 
 	@Override
-	public List<RawMaterialsStarco> fetchRawMaterialStarco() {
+	public List<RawMaterialsStarco> fetchRawMaterialStarco() throws Exception{
 		Query query =  sessionFactory.getCurrentSession().createQuery("from RawMaterialsStarco");
 		List<RawMaterialsStarco> rawMaterialsStarcoList = (List<RawMaterialsStarco>)query.list();
 		return rawMaterialsStarcoList;
+	}
+
+	@Override
+	public void updateRawMaterial(RawMaterials rawMaterials) throws ConstraintViolationException,Exception{
+		sessionFactory.getCurrentSession().update(rawMaterials);
+		sessionFactory.getCurrentSession().flush();
 	}
 
 	

@@ -36,6 +36,7 @@
 						</p:column>
 						<f:facet name="footer">
  							<p:commandButton process="vendorDatabase" update="vendorDatabase" value="Delete Vendor" action="#{vendorController.deleteVendor()}" />
+						<p:commandButton update="vendorDatabase" value="Refresh Vendor List" action="#{vendorController.showVendors()}" />
 						</f:facet>
 					</p:dataTable>
 				</h:form>

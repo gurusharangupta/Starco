@@ -40,6 +40,10 @@ public class Packing implements Serializable{
 	@Column
 	private float pricePerKg;
 	
+	@Column
+	private float capacity;
+	
+	
 	@OneToMany(mappedBy="packing",cascade=CascadeType.ALL,fetch=FetchType.EAGER)
 	private List<ClientProductStarco> clientProductStarcoList;
 
@@ -90,6 +94,14 @@ public class Packing implements Serializable{
 	public void setClientProductStarcoList(
 			List<ClientProductStarco> clientProductStarcoList) {
 		this.clientProductStarcoList = clientProductStarcoList;
+	}
+
+	public float getCapacity() {
+		return capacity;
+	}
+
+	public void setCapacity(float capacity) {
+		this.capacity = capacity;
 	}
 	
 	

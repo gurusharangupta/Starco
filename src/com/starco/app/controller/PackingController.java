@@ -15,6 +15,7 @@ import org.springframework.stereotype.Component;
 import com.starco.app.model.Packing;
 import com.starco.app.model.ProductRecipe;
 import com.starco.app.model.RawMaterials;
+import com.starco.app.model.Vendor;
 import com.starco.app.service.PackingService;
 
 
@@ -80,6 +81,18 @@ public class PackingController {
 		}
 	}
 
+	public Packing getPacking(Integer id) {
+		if (id == null) {
+			throw new IllegalArgumentException("no id provided");
+		}
+		for (Packing packing : packingList) {
+			if (id.equals(packing.getId())) {
+				return packing;
+			}
+		}
+		return null;
+	}
+	
 	public Packing getPacking() {
 		return packing;
 	}

@@ -31,11 +31,18 @@
 							<h:outputText value="#{packing.price}" />
 						</p:column>
 						
+						<p:column headerText="Capacity">
+							<h:outputText value="#{packing.capacity}" />
+						</p:column>
+						
 						<p:column headerText="Price/Kg">
 							<h:outputText value="#{packing.pricePerKg}" />
 						</p:column>
 						<f:facet name="footer">
  							<p:commandButton process="packingDatabase" update="packingDatabase" value="Delete Packing" />
+ 							<p:commandButton update="packingDatabase"
+								value="Refresh List"
+								action="#{packingController.showTypeOfPacking()}" />
 						</f:facet>
 					</p:dataTable>
 				</h:form>

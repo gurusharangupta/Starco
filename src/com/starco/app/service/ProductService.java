@@ -12,6 +12,8 @@ public interface ProductService {
 
 	void addFinishedProduct(Product product) throws Exception;
 
+	void updateProduct(Product product) throws Exception;
+
 	
 
 }

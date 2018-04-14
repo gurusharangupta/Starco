@@ -1,0 +1,91 @@
+<f:view xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:ng="http://xmlns.jcp.org/jsf/passthrough"
+	xmlns:p="http://primefaces.org/ui">
+
+	<h:body>
+		<ui:composition template="../common.xhtml">
+			<ui:define name="content">
+
+
+				<h:form>
+
+					<table style="border: none;">
+
+						<tr>
+
+							<td>Name</td>
+							<td><p:inputText
+									value="#{rawMaterialController.selectedRawmaterial.name}" /></td>
+
+						</tr>
+
+						<tr>
+
+							<td>Vendor</td>
+							
+							<td><p:selectOneMenu id="vendor" value="#{rawMaterialController.selectedRawmaterial.vendor}"
+								converter="vendorConverter" 
+								style="width:150px">
+								<f:selectItems value="#{vendorController.vendorList}" var="vendor"
+                               itemValue="#{vendor}"
+                               itemLabel="#{vendor.name}"/>
+							</p:selectOneMenu></td>
+
+						</tr>
+
+						<tr>
+							<td>Price</td>
+							<td><p:inputText value="#{rawMaterialController.selectedRawmaterial.price}"/></td>
+						</tr>
+						
+						
+
+						<tr>
+						<td><B>Specifications</B></td>
+						<td></td>
+						</tr>
+						
+						<tr>
+							<td>PH</td>
+							<td><p:inputText value="#{rawMaterialController.selectedRawmaterial.ph}"/>%</td>
+						</tr>
+						<tr>
+							<td>Solids</td>
+							<td><p:inputText value="#{rawMaterialController.selectedRawmaterial.solids}"/></td>
+						</tr>
+						<tr>
+							<td>Viscosity</td>
+							<td><p:inputText value="#{rawMaterialController.selectedRawmaterial.viscosity}"/>seconds</td>
+						</tr>
+						<tr>
+							<td>Appearance</td>
+							<td><p:inputText value="#{rawMaterialController.selectedRawmaterial.appearance}"/></td>
+						</tr>
+						
+						<tr>
+							<td>Color</td>
+							<td><p:inputText value="#{rawMaterialController.selectedRawmaterial.color}"/></td>
+						</tr>
+						<tr>
+
+							<td><p:commandButton
+									actionListener="#{rawMaterialController.editRawMaterial()}"
+									action="/app/products/rawmaterials.xhtml"
+									value="Edit Raw Material"/></td>
+							<td><p:commandButton type="reset" value="Reset" /></td>
+
+						</tr>
+					</table>
+
+				</h:form>
+
+
+			</ui:define>
+		</ui:composition>
+
+	</h:body>
+</f:view>
+

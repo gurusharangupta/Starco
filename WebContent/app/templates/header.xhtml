@@ -8,6 +8,28 @@ xmlns="http://www.w3.org/1999/xhtml"
 <h:form>
 
 <p:megaMenu orientation="horizontal" style="margin-top:20px">
+
+<p:submenu label="Sales" icon="ui-icon-check">
+        <p:column>
+          <p:submenu label="Show">
+                <p:menuitem value="Show Sales" url="/app/products/sales.xhtml" />
+            </p:submenu>
+            <p:submenu label="Add">
+                <p:menuitem value="Add Sales" url="/app/products/addsales.xhtml" />
+            </p:submenu>
+        </p:column> 
+    </p:submenu>
+ <p:submenu label="Clients" icon="ui-icon-check">
+        <p:column>
+          <p:submenu label="Show">
+                <p:menuitem value="Show Clients" url="/app/products/client.xhtml" />
+            </p:submenu>
+            <p:submenu label="Add">
+                <p:menuitem value="Add Clients" url="/app/products/addclient.xhtml" />
+            </p:submenu>
+        </p:column> 
+    </p:submenu>
+    
     <p:submenu label="Finished Goods" icon="ui-icon-check">
         <p:column>
           <p:submenu label="Show">
@@ -40,6 +62,7 @@ xmlns="http://www.w3.org/1999/xhtml"
             </p:submenu>
              <p:submenu label="Starco">
                 <p:menuitem value="Add Raw Materials" url="/app/products/addrawmaterialstarco.xhtml"/>
+                   <p:menuitem value="Show Raw Materials" url="/app/products/rawmaterialsstarco.xhtml" action="#{rawMaterialStarcoController.fetchRawMaterialStarco()}"/>
             </p:submenu>
         </p:column> 
     </p:submenu>

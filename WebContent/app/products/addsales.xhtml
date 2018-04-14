@@ -1,0 +1,141 @@
+<f:view xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:ng="http://xmlns.jcp.org/jsf/passthrough"
+	xmlns:p="http://primefaces.org/ui">
+
+	<h:body>
+		<ui:composition template="../common.xhtml">
+			<ui:define name="content">
+
+
+				<h:form id="salesForm">
+
+					<table style="border: none;">
+
+						<tr>
+
+							<td><p:outputLabel value="Name of Client" /></td>
+							<td><p:selectOneMenu id="client"
+									value="#{salesController.sales.client}"
+									converter="clientConverter" style="width:150px">
+									<f:selectItems value="#{clientController.clientList}"
+										var="client" itemValue="#{client}" itemLabel="#{client.name}" />
+									<p:ajax onsuccess="#{salesController.changeClient()}"
+										update="clientProductStarco" />
+								</p:selectOneMenu></td>
+
+						</tr>
+					</table>
+					<br />
+					<br />
+					<table>
+						<tr>
+							<td></td>
+							<td><p:dataTable id="clientProductStarco"
+									style="width:325px;" var="clientProduct"
+									value="#{salesController.sales.client.clientProductList}"
+									selection="#{salesController.sales.clientProductStarco}"
+									rowKey="#{clientProduct.id}">
+									<f:facet name="header">
+				           Choose Product
+				        </f:facet>
+									<p:column selectionMode="single"
+										style="width:16px;text-align:center" />
+									<p:column headerText="Product Name">
+										<h:outputText value="#{clientProduct.product.productName}" />
+									</p:column>
+
+									<p:column headerText="Product Sale Price">
+										<h:outputText value="#{clientProduct.price}" />
+									</p:column>
+									<p:column headerText="Packing Capacity">
+										<h:outputText value="#{clientProduct.packing.capacity}" />
+									</p:column>
+
+									<f:facet name="footer">
+										<p:commandButton value="Update Below Details"
+											action="#{salesController.calculateSelectedProductDetails()}"
+											update="salesForm" />
+
+									</f:facet>
+								</p:dataTable></td>
+
+
+						</tr>
+					</table>
+					<br />
+					<br />
+					<table>
+						<tr>
+							<td><p:outputLabel value="Quantity" /></td>
+							<td><p:inputText id="quantity"
+									value="#{salesController.sales.quantity}" /></td>
+
+						</tr>
+						<tr>
+							<td><p:outputLabel value="Carboys" /></td>
+							<td><p:outputLabel id="carboys"
+									value="#{salesController.sales.carboys}" /></td>
+
+						</tr>
+
+						<tr>
+							<td><p:outputLabel value="Total Amount" /></td>
+							<td><p:outputLabel id="totalAmount"
+									value="#{salesController.sales.totalAmount}" /></td>
+
+						</tr>
+
+						<tr>
+							<td><p:outputLabel
+									rendered="#{salesController.sales.clientProductStarco.client.ogs eq false}"
+									value="CGST" /></td>
+							<td><p:outputLabel
+									rendered="#{salesController.sales.clientProductStarco.client.ogs eq false}"
+									value="#{salesController.sales.cGST}" /></td>
+
+						</tr>
+
+						<tr>
+							<td><p:outputLabel value="SGST" /></td>
+							<td><p:outputLabel value="#{salesController.sales.sGST}" /></td>
+
+						</tr>
+
+						<tr>
+							<td><p:outputLabel
+									rendered="#{salesController.sales.clientProductStarco.client.ogs eq true}"
+									value="IGST" /></td>
+							<td><p:outputLabel
+									rendered="#{salesController.sales.clientProductStarco.client.ogs eq true}"
+									value="#{salesController.sales.iGST}" /></td>
+
+						</tr>
+						<tr>
+							<td><p:outputLabel value="Total GST" /></td>
+							<td><p:outputLabel value="#{salesController.sales.totalGST}" /></td>
+
+						</tr>
+
+						<tr>
+							<td><p:commandButton
+									
+									action="#{salesController.addSales()}" update="salesForm"
+									value="Add Sales" /> 
+							<td><p:commandButton type="reset"
+									value="Reset" /></td></td>
+						</tr>
+						
+					</table>
+
+				</h:form>
+
+
+			</ui:define>
+		</ui:composition>
+
+	</h:body>
+</f:view>
+

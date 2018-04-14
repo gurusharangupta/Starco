@@ -31,6 +31,12 @@ public class ProductDaoImpl implements ProductDao {
 		sessionFactory.getCurrentSession().save(product);
 	}
 
+	@Override
+	public void updateProduct(Product product) throws Exception{
+		sessionFactory.getCurrentSession().update(product);
+		
+	}
+
 	
 
 }

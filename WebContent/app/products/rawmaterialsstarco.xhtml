@@ -1,0 +1,65 @@
+<f:view xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:ng="http://xmlns.jcp.org/jsf/passthrough"
+	xmlns:p="http://primefaces.org/ui">
+
+	<h:body>
+		<ui:composition template="../common.xhtml">
+			<ui:define name="content">
+
+
+				<h:form>
+					<p:dataTable var="rawmaterialStarco" id="rawMaterialStarcoDatabase"
+						value="#{rawMaterialStarcoController.listRawMaterialsStarco}">
+						<p:column headerText="Name">
+							<h:outputText value="#{rawmaterialStarco.rawMaterials.name}" />
+						</p:column>
+
+						<p:column headerText="Vendor">
+							<h:outputText value="#{rawmaterialStarco.rawMaterials.vendor.name}" />
+						</p:column>
+						<p:column headerText="Price">
+							<h:outputText value="#{rawmaterialStarco.rawMaterials.price}" />
+						</p:column>
+						
+						<p:column headerText="SP.Solids">
+							<h:outputText value="#{rawmaterialStarco.rawMaterials.solids}" />
+						</p:column>
+						
+						<p:column headerText="SP. PH%">
+							<h:outputText value="#{rawmaterialStarco.rawMaterials.ph}" />
+						</p:column>
+						
+						<p:column headerText="SP. Viscosity">
+							<h:outputText value="#{rawmaterialStarco.rawMaterials.viscosity}" />
+						</p:column>
+						
+						<p:column headerText="SP. Appearance">
+							<h:outputText value="#{rawmaterialStarco.rawMaterials.appearance}" />
+						</p:column>
+						
+						<p:column headerText="SP. Color">
+							<h:outputText value="#{rawmaterialStarco.rawMaterials.color}" />
+						</p:column>
+						
+						<p:column headerText="MOQ">
+							<h:outputText value="#{rawmaterialStarco.moq}" />
+						</p:column>
+						<f:facet name="footer">
+							<p:commandButton update="rawMaterialStarcoDatabase"
+								value="Refresh List"
+								action="#{rawMaterialStarcoController.fetchRawMaterialStarco()}" />
+						</f:facet>
+
+					</p:dataTable>
+				</h:form>
+
+
+			</ui:define>
+		</ui:composition>
+
+	</h:body>
+</f:view>
+

@@ -16,8 +16,10 @@ import org.springframework.stereotype.Component;
 
 import com.starco.app.model.Client;
 import com.starco.app.model.ClientProductStarco;
+import com.starco.app.model.Packing;
 import com.starco.app.model.Product;
 import com.starco.app.model.ProductRecipe;
+import com.starco.app.service.ClientService;
 import com.starco.app.service.ProductService;
 
 
@@ -31,67 +33,69 @@ public class ClientController {
 	
 	private List<ClientProductStarco> clientProductStarcoList = new ArrayList<ClientProductStarco>();
 	
+	private List<Client> clientList = null;
+	
 	@Autowired
-	private ProductService productService;
+	private ClientService clientService;
 
-	private List<Product> listFinishedGoods = new ArrayList<>();
+	@Autowired
+	private SalesController salesController;
 
-	private Product product = new Product();
-
-	private List<ProductRecipe> listProductReciepe = new ArrayList<>();
+	
 
 	@PostConstruct
 	public void init() {
-		showfinishedGoods();
-		ProductRecipe productRecipe = new ProductRecipe();
-		listProductReciepe.add(productRecipe);
+		fetchClients();
+		ClientProductStarco clientProductStarco = new ClientProductStarco();
+		clientProductStarcoList.add(clientProductStarco);
 
 	}
 
-	public void showfinishedGoods() {
+	public void fetchClients() {
 		try {
-			listFinishedGoods = productService.listFinishedGoodsProduct();
+			clientList = clientService.clientList();
+			salesController.updateSales();
 		} catch (Exception e) {
 
 			FacesContext.getCurrentInstance().addMessage(
 					null,
 					new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error",
-							"Error occured while retrieving finished goods"));
+							"Error occured while retrieving clients"));
 		}
-		System.out.println("Listing Finished Goods");
+		System.out.println("Listing Clients");
 	}
 
-	public void addFinishedProduct() {
-		calculateAllCost();
+	public void addClient() {
+	
 		boolean error=false;
-		for(int i=0;i<listProductReciepe.size()-1;i++){
-			listProductReciepe.get(i).setProduct(product);
-			for(int j=i+1;j<=listProductReciepe.size()-1;j++){
-				if(listProductReciepe.get(i).getRawMaterialsStarco().getName().equals(listProductReciepe.get(j).getRawMaterialsStarco().getName())){
+		for(int i=0;i<clientProductStarcoList.size()-1;i++){
+			clientProductStarcoList.get(i).setClient(client);
+			for(int j=i+1;j<=clientProductStarcoList.size()-1;j++){
+				if(clientProductStarcoList.get(i).getProduct().getProductName().equals(clientProductStarcoList.get(j).getProduct().getProductName())){
 					FacesContext.getCurrentInstance().addMessage(
 							null,
 							new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error",
-									"Same type of Raw Material is mentioned more than once"));
+									"Same type of Product is added more than once"));
 					error=true;
 				}
 			}
 		}
-		listProductReciepe.get(listProductReciepe.size()-1).setProduct(product);
+		clientProductStarcoList.get(clientProductStarcoList.size()-1).setClient(client);
 		if(!error){
-			Set<ProductRecipe> productReciepeSet = new HashSet<ProductRecipe>(listProductReciepe);
-		product.setProductRecipe(productReciepeSet);
+		client.setClientProductList(clientProductStarcoList);
 		try {
-			productService.addFinishedProduct(product);
+			clientService.addClient(client);
+			salesController.updateSales();
 			FacesContext.getCurrentInstance().addMessage(
 					null,
 					new FacesMessage(FacesMessage.SEVERITY_INFO, "Info",
-							"Finished Product Added"));
-			clearReciepeList();
+							"New Client Added"));
+			clearProductStarcoList();
 		} catch (Exception e) {
 			FacesContext.getCurrentInstance().addMessage(
 					null,
 					new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error",
-							"Error occured while adding finished goods"));
+							"Error occured while adding new Client"));
 			e.printStackTrace();
 		}
 		
@@ -100,76 +104,66 @@ public class ClientController {
 	}
 
 	public void addToReciepe() {
-		calculateAllCost();
-		listProductReciepe.add(new ProductRecipe());
+		clientProductStarcoList.add(new ClientProductStarco());
 
 	}
 
 	public void removeFromReciepe() {
-		calculateAllCost();
-		if (listProductReciepe.size() > 1) {
-			listProductReciepe.remove(listProductReciepe.size() - 1);
+		if (clientProductStarcoList.size() > 1) {
+			clientProductStarcoList.remove(clientProductStarcoList.size() - 1);
 
 		}
 
 	}
 
-	public void clearReciepeList() {
+	public void clearProductStarcoList() {
 		
-			listProductReciepe.clear();
-			listProductReciepe.add(new ProductRecipe());
-			product =null;
-			product = new Product();
+		clientProductStarcoList.clear();
+		clientProductStarcoList.add(new ClientProductStarco());
+		client =null;
+		client = new Client();
 		
 
 	}
 	
-	public void calculateAllCost(){
-		float reciepeCost = 0;
-		for(ProductRecipe productRecipe: listProductReciepe){
-			reciepeCost+= productRecipe.getRawMaterialsStarco()
-					.getPrice() * productRecipe.getQuantity();
+	public Client getClient(Integer id) {
+		if (id == null) {
+			throw new IllegalArgumentException("no id provided");
 		}
-		product.setMaterialCost(reciepeCost);
-		float totalCost = product.getMaterialCost() + product.getCostOfEnergyAndLabor() + product.getCostOfPacking();
-		float priceForExporter = (float) (totalCost * 1.25);
-		float priceForDealer = (float) (totalCost * 0.25);
-		float priceForCustomer = (float) (totalCost * 0.85);
-		float priceInCash = (float) (totalCost * 1.85);
-		
-		product.setTotalCost(totalCost);
-		product.setPriceForExporter(priceForExporter);
-		product.setPriceForDealer(priceForDealer);
-		product.setPriceForCustomer(priceForCustomer);
-		product.setPriceInCash(priceInCash);
-		
-		
+		for (Client client : clientList) {
+			if (id.equals(client.getId())) {
+				return client;
+			}
+		}
+		return null;
+	}
+	
+
+	public List<ClientProductStarco> getClientProductStarcoList() {
+		return clientProductStarcoList;
+	}
+
+	public void setClientProductStarcoList(
+			List<ClientProductStarco> clientProductStarcoList) {
+		this.clientProductStarcoList = clientProductStarcoList;
+	}
+
+	public Client getClient() {
+		return client;
+	}
+
+	public void setClient(Client client) {
+		this.client = client;
+	}
+
+	public List<Client> getClientList() {
+		return clientList;
+	}
+
+	public void setClientList(List<Client> clientList) {
+		this.clientList = clientList;
 	}
 
 	
-
-	public Product getProduct() {
-		return product;
-	}
-
-	public void setProduct(Product product) {
-		this.product = product;
-	}
-
-	public List<ProductRecipe> getListProductReciepe() {
-		return listProductReciepe;
-	}
-
-	public void setListProductReciepe(List<ProductRecipe> listProductReciepe) {
-		this.listProductReciepe = listProductReciepe;
-	}
-
-	public List<Product> getListFinishedGoods() {
-		return listFinishedGoods;
-	}
-
-	public void setListFinishedGoods(List<Product> listFinishedGoods) {
-		this.listFinishedGoods = listFinishedGoods;
-	}
 
 }
