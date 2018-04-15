@@ -23,7 +23,7 @@ public class SalesDaoImpl implements SalesDao {
 	}
 
 	@Override
-	public List<Sales> fetchSales() throws Exception {
+	public List<Sales> fetchSalesForToday() throws Exception {
 
 		Query query = sessionFactory.getCurrentSession().createQuery(
 				"from Sales");

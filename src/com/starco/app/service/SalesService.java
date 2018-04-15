@@ -8,6 +8,6 @@ public interface SalesService {
 
 	public void addSales(Sales sales) throws Exception;
 
-	public List<Sales> fetchSales() throws Exception;
+	public List<Sales> fetchSalesForToday() throws Exception;
 
 }

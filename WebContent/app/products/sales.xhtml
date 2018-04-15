@@ -11,6 +11,35 @@
 
 
 				<h:form>
+				<table>
+				<tr>
+				<td>
+				<p:commandButton
+									actionListener="#{clientController.addClient()}"
+									action="#{clientController.fetchClients()}" 
+									value="Todays  Sale" />
+									</td>
+									<td>
+				<p:commandButton
+									actionListener="#{clientController.addClient()}"
+									action="#{clientController.fetchClients()}" 
+									value="Monthly  Sale" />
+									</td>
+									<td>
+				<p:commandButton
+									actionListener="#{clientController.addClient()}"
+									action="#{clientController.fetchClients()}" 
+									value="Quaterly  Sale" />
+									</td>
+									<td>
+				<p:commandButton
+									actionListener="#{clientController.addClient()}"
+									action="#{clientController.fetchClients()}" 
+									value="Yearly  Sale" />
+									</td>
+									
+							</tr>		
+									</table>
 					<p:dataTable id="salesDatabase" var="sales"
 						value="#{salesController.salesList}">
 						<p:column headerText="Client Name">
@@ -18,12 +47,27 @@
 						</p:column>
 
 						<p:column headerText="Product Name">
-							<h:outputText value="#{sales.clientProductStarco.product.productName}" />
+							<h:outputText
+								value="#{sales.clientProductStarco.product.productName}" />
 						</p:column>
-						
-						
+
+						<p:column headerText="Product Price">
+							<h:outputText value="#{sales.clientProductStarco.product.price}" />
+						</p:column>
+
+						<p:column headerText="Quantity">
+							<h:outputText value="#{sales.quantity}" />
+						</p:column>
+						<p:column headerText="Total Amount">
+							<h:outputText value="#{sales.totalAmount}" />
+						</p:column>
+						<p:column headerText="Total GST">
+							<h:outputText value="#{sales.totalGST}" />
+						</p:column>
+
+
 						<f:facet name="footer">
-							
+
 						</f:facet>
 					</p:dataTable>
 				</h:form>

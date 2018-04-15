@@ -8,6 +8,6 @@ public interface SalesDao {
 
 	void addSales(Sales sales) throws Exception;
 
-	List<Sales> fetchSales() throws Exception;
+	List<Sales> fetchSalesForToday() throws Exception;
 
 }

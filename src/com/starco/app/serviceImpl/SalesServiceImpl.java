@@ -32,9 +32,9 @@ public class SalesServiceImpl implements SalesService {
 	}
 
 	@Override
-	public List<Sales> fetchSales() throws Exception {
+	public List<Sales> fetchSalesForToday() throws Exception {
 		
-		return salesDao.fetchSales();
+		return salesDao.fetchSalesForToday();
 	}
 
 	

@@ -1,6 +1,7 @@
 package com.starco.app.controller;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import javax.annotation.PostConstruct;
@@ -36,7 +37,7 @@ public class SalesController {
 
 	@PostConstruct
 	public void init() {
-		fetchSales();
+		fetchSalesForToday();
 		clientController.fetchClients();
 		if (clientController.getClientList().size() != 0 && sales.getClient() == null) {
 			sales.setClient(clientController.getClientList().get(0));
@@ -50,9 +51,9 @@ public class SalesController {
 
 	}
 	
-	public void fetchSales(){
+	public void fetchSalesForToday(){
 		try {
-			salesList = salesService.fetchSales();
+			salesList = salesService.fetchSalesForToday();
 		} catch (Exception e) {
 			FacesContext
 			.getCurrentInstance()
@@ -141,9 +142,16 @@ public class SalesController {
 		try {
 			if(sales.getQuantity()!=0){
 			calculateSelectedProductDetails();
+			Date date = new Date();
+			date.setMinutes(0);
+			date.setHours(0);
+			date.setSeconds(0);
+			date.setTime(0);
+			sales.setSaleDate(date);
 			salesService.addSales(sales);
 			sales = new Sales();
-			updateSales(); 
+			updateSales();
+			fetchSalesForToday();
 			FacesContext.getCurrentInstance().addMessage(
 					null,
 					new FacesMessage(FacesMessage.SEVERITY_INFO, "Info",
