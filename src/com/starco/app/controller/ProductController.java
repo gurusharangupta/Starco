@@ -127,12 +127,14 @@ public class ProductController {
 	}
 	
 	public void calculateAllCost(){
-		float reciepeCost = 0;
+		float reciepeCost=0,totalQuantity = 0;
 		for(ProductRecipe productRecipe: listProductReciepe){
 			reciepeCost+= productRecipe.getRawMaterialsStarco().getRawMaterials()
 					.getPrice() * productRecipe.getQuantity();
+			totalQuantity+=productRecipe.getQuantity();
 		}
-		product.setMaterialCost(reciepeCost);
+		
+		product.setMaterialCost(reciepeCost/totalQuantity);
 		float totalCost = product.getMaterialCost() + product.getCostOfEnergyAndLabor() + product.getCostOfPacking();
 		float priceForExporter = (float) (totalCost * 1.25);
 		float priceForDealer = (float) (totalCost * 0.25);
