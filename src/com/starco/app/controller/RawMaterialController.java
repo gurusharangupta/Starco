@@ -44,6 +44,9 @@ public class RawMaterialController {
 	
 	@Autowired
 	private ProductController productController;
+	
+	@Autowired
+	private RawMaterialStarcoController rawMaterialStarcoController;
 
 	public void showRawMaterials() {
 		try {
@@ -86,7 +89,8 @@ public class RawMaterialController {
 
 		try {
 			rawMaterialService.updateRawMaterial(selectedRawmaterial);
-			float reciepeCost = 0;
+			float reciepeCost = 0,totalQuantity=0;
+			boolean productReciepeUpdate=false;
 			for(RawMaterials rawMaterial:listRawMaterials){
 				if(rawMaterial.equals(selectedRawmaterial)){
 					if(selectedRawMaterialPrice!=selectedRawmaterial.getPrice()){
@@ -98,7 +102,16 @@ public class RawMaterialController {
 									if( productReciepe.getRawMaterialsStarco().getRawMaterials().equals( selectedRawmaterial)){
 										reciepeCost+= selectedRawmaterial
 												.getPrice() * productReciepe.getQuantity();
-										product.setMaterialCost(reciepeCost);
+										totalQuantity+=productReciepe.getQuantity();
+										productReciepeUpdate=true;
+									}else{
+										reciepeCost+= productReciepe.getRawMaterialsStarco().getRawMaterials()
+												.getPrice() * productReciepe.getQuantity();	
+										totalQuantity+=productReciepe.getQuantity();
+									}
+								}
+								if(productReciepeUpdate){
+										product.setMaterialCost(reciepeCost/totalQuantity);
 										float totalCost = product.getMaterialCost() + product.getCostOfEnergyAndLabor() + product.getCostOfPacking();
 										float priceForExporter = (float) (totalCost * 1.25);
 										float priceForDealer = (float) (totalCost * 0.25);
@@ -119,14 +132,18 @@ public class RawMaterialController {
 															"Error occured while updating prices for product using same raw Material"));
 										}
 									}
+								productReciepeUpdate = false;
+								
 								}
 								
-							}
+							
 						}
 					}
 				}
 			}
 			showRawMaterials();
+			productController.showfinishedGoods();
+			rawMaterialStarcoController.fetchRawMaterialStarco();
 			System.out.println("Editing Raw Materials");
 			FacesContext.getCurrentInstance().addMessage(
 					null,

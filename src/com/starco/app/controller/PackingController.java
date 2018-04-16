@@ -53,9 +53,9 @@ public class PackingController {
 
 		try {
 			float price = packing.getPrice();
-			float weight = packing.getWeight();
-			if(price!=0 && weight!=0){
-			float pricePerKg = price/weight;
+			float capacity = packing.getCapacity();
+			if(price!=0 && capacity!=0){
+			float pricePerKg = price/capacity;
 					packing.setPricePerKg(pricePerKg);
 					packingService.addPacking(packing);
 					packing = new Packing();

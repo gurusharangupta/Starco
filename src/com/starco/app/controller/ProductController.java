@@ -66,6 +66,7 @@ public class ProductController {
 	public void addFinishedProduct() {
 		calculateAllCost();
 		boolean error=false;
+		if(product.getTotalCost()!=0 && product.getTotalCost()!=0){
 		for(int i=0;i<listProductReciepe.size()-1;i++){
 			listProductReciepe.get(i).setProduct(product);
 			for(int j=i+1;j<=listProductReciepe.size()-1;j++){
@@ -79,6 +80,13 @@ public class ProductController {
 			}
 		}
 		listProductReciepe.get(listProductReciepe.size()-1).setProduct(product);
+		}else{
+			FacesContext.getCurrentInstance().addMessage(
+					null,
+					new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error",
+							"Value of Material Cost or Total Cost should be more than zero"));
+			error = true;
+		}
 		if(!error){
 			Set<ProductRecipe> productReciepeSet = new HashSet<ProductRecipe>(listProductReciepe);
 		product.setProductRecipe(productReciepeSet);
@@ -133,7 +141,7 @@ public class ProductController {
 					.getPrice() * productRecipe.getQuantity();
 			totalQuantity+=productRecipe.getQuantity();
 		}
-		
+		if(totalQuantity!=0){
 		product.setMaterialCost(reciepeCost/totalQuantity);
 		float totalCost = product.getMaterialCost() + product.getCostOfEnergyAndLabor() + product.getCostOfPacking();
 		float priceForExporter = (float) (totalCost * 1.25);
@@ -146,7 +154,7 @@ public class ProductController {
 		product.setPriceForDealer(priceForDealer);
 		product.setPriceForCustomer(priceForCustomer);
 		product.setPriceInCash(priceInCash);
-		
+		}
 		
 	}
 
