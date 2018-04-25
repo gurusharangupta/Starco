@@ -1,5 +1,7 @@
 package com.starco.app.model;
 
+import java.io.Serializable;
+import java.time.LocalDate;
 import java.util.Date;
 
 import javax.persistence.CascadeType;
@@ -15,7 +17,13 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name="SALES")
-public class Sales {
+public class Sales implements Serializable{
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
 
 	
 	@Id
@@ -33,7 +41,7 @@ public class Sales {
 	private ClientProductStarco clientProductStarco;
 	
 	@Column
-	private Date saleDate;
+	private LocalDate saleDate;
 	
 	@Column
 	private float quantity;
@@ -80,13 +88,6 @@ public class Sales {
 		this.clientProductStarco = clientProductStarco;
 	}
 
-	public Date getSaleDate() {
-		return saleDate;
-	}
-
-	public void setSaleDate(Date saleDate) {
-		this.saleDate = saleDate;
-	}
 
 
 	public float getQuantity() {
@@ -143,6 +144,14 @@ public class Sales {
 
 	public void setTotalGST(float totalGST) {
 		this.totalGST = totalGST;
+	}
+
+	public LocalDate getSaleDate() {
+		return saleDate;
+	}
+
+	public void setSaleDate(LocalDate saleDate) {
+		this.saleDate = saleDate;
 	}
 	
 	

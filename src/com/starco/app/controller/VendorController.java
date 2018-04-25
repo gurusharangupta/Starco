@@ -76,7 +76,7 @@ public class VendorController {
 		try {
 			vendorService.deleteVendor(vendor);
 			showVendors();
-			rawMaterialController.showRawMaterials();
+			rawMaterialController.updateAll();
 			vendor = new Vendor();
 			FacesContext.getCurrentInstance().addMessage(
 					null,

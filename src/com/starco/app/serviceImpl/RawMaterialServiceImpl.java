@@ -26,7 +26,7 @@ public class RawMaterialServiceImpl implements RawMaterialService {
 	}
 
 	@Override
-	public void addRawMaterial(RawMaterials rawMaterials) throws Exception {
+	public void addRawMaterial(RawMaterials rawMaterials) throws ConstraintViolationException,Exception{
 		rawMaterialDao.addRawMaterial(rawMaterials);
 
 	}

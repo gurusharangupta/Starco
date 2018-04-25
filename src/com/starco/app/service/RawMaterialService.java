@@ -11,7 +11,7 @@ public interface RawMaterialService {
 
 	List<RawMaterials> listRawMaterials() throws Exception;
 
-	void addRawMaterial(RawMaterials rawMaterials) throws Exception;
+	void addRawMaterial(RawMaterials rawMaterials)throws ConstraintViolationException,Exception;
 	
 	List<String> getUniqueRawMaterialList(String query) throws Exception;
 	

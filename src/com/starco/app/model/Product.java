@@ -1,5 +1,6 @@
 package com.starco.app.model;
 
+import java.io.Serializable;
 import java.util.Set;
 
 import javax.persistence.CascadeType;
@@ -13,7 +14,13 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name="PRODUCT")
-public class Product {
+public class Product implements Serializable{
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
 
 	@Id
 	@GeneratedValue

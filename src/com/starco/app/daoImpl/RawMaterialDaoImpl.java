@@ -34,7 +34,7 @@ public class RawMaterialDaoImpl implements RawMaterialDao{
 	}
 
 	@Override
-	public void addRawMaterial(RawMaterials rawMaterials) throws Exception{
+	public void addRawMaterial(RawMaterials rawMaterials) throws ConstraintViolationException,Exception{
 		sessionFactory.getCurrentSession().save(rawMaterials);
 		
 	}

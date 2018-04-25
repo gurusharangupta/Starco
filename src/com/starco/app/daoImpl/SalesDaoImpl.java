@@ -1,13 +1,20 @@
 package com.starco.app.daoImpl;
 
+import java.time.LocalDate;
 import java.util.List;
 
+import org.hibernate.Criteria;
 import org.hibernate.Query;
 import org.hibernate.SessionFactory;
+import org.hibernate.criterion.Criterion;
+import org.hibernate.criterion.MatchMode;
+import org.hibernate.criterion.Projections;
+import org.hibernate.criterion.Restrictions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.starco.app.dao.SalesDao;
+import com.starco.app.model.RawMaterials;
 import com.starco.app.model.Sales;
 
 @Repository
@@ -30,4 +37,7 @@ public class SalesDaoImpl implements SalesDao {
 		List<Sales> salesList = (List<Sales>) query.list();
 		return salesList;
 	}
+	
+	
+	
 }

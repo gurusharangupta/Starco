@@ -1,5 +1,7 @@
 package com.starco.app.model;
 
+import java.io.Serializable;
+
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -16,7 +18,13 @@ import javax.persistence.UniqueConstraint;
 @Entity
 @Table(name="RAW_MATERIAL",uniqueConstraints = {
         @UniqueConstraint(columnNames =  {"name", "vendor_id"})})
-public class RawMaterials {
+public class RawMaterials implements Serializable{
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
 
 	
 	@Id

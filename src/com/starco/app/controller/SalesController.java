@@ -1,5 +1,6 @@
 package com.starco.app.controller;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -12,6 +13,8 @@ import javax.faces.context.FacesContext;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+
+import  static com.starco.app.contant.Constants.*;
 
 import com.starco.app.model.Client;
 import com.starco.app.model.ClientProductStarco;
@@ -39,14 +42,7 @@ public class SalesController {
 	public void init() {
 		fetchSalesForToday();
 		clientController.fetchClients();
-		if (clientController.getClientList().size() != 0 && sales.getClient() == null) {
-			sales.setClient(clientController.getClientList().get(0));
-			sales.setClientProductStarco(new ClientProductStarco());
-			
-		}else{
-		sales.setClient(new Client());
-		sales.setClientProductStarco(new ClientProductStarco());
-	}
+		
 		
 
 	}
@@ -72,7 +68,11 @@ public class SalesController {
 		if (clientController.getClientList().size() != 0 && sales.getClient() == null) {
 			sales.setClient(clientController.getClientList().get(0));
 			sales.setClientProductStarco(new ClientProductStarco());
-		}
+			
+		}else{
+		sales.setClient(new Client());
+		sales.setClientProductStarco(new ClientProductStarco());
+	}
 	}
 
 	public Object getClientProductStarco(Integer id) {
@@ -98,7 +98,7 @@ public class SalesController {
 
 	public void calculateSelectedProductDetails() {
 		
-		float cGST = 0,sGST,iGST = 0,totalGST,totalAmount,carboys;
+		float cGST = 0,sGST = 0,iGST = 0,totalGST,totalAmount,carboys;
 		if (sales.getQuantity() != 0
 				&& sales.getClientProductStarco()!= null && sales.getClientProductStarco().getPrice() != 0) {
 			carboys = sales.getQuantity()
@@ -109,12 +109,12 @@ public class SalesController {
 			sales.setTotalAmount(totalAmount);
 			
 			if(sales.getClient().isOgs()){
-				sGST = (float) (0.09 * totalAmount);
-				iGST = (float) (0.09 * totalAmount);
+				
+				iGST = (float) (IGSTPercentage * totalAmount);
 				totalGST = sGST + iGST;
 			}else{
-				sGST = (float) (0.09 * totalAmount);
-				cGST = (float) (0.09 * totalAmount);
+				sGST = (float) (SGSTPercentage * totalAmount);
+				cGST = (float) (CGSTPercentage * totalAmount);
 				totalGST = sGST + cGST;
 				
 				
@@ -142,11 +142,8 @@ public class SalesController {
 		try {
 			if(sales.getQuantity()!=0){
 			calculateSelectedProductDetails();
-			Date date = new Date();
-			date.setMinutes(0);
-			date.setHours(0);
-			date.setSeconds(0);
-			date.setTime(0);
+			LocalDate date = LocalDate.now();
+			
 			sales.setSaleDate(date);
 			salesService.addSales(sales);
 			sales = new Sales();

@@ -13,6 +13,7 @@ import org.hibernate.exception.ConstraintViolationException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import  static com.starco.app.contant.Constants.*;
 import com.starco.app.model.Product;
 import com.starco.app.model.ProductRecipe;
 import com.starco.app.model.RawMaterials;
@@ -46,6 +47,14 @@ public class RawMaterialController {
 	private ProductController productController;
 	
 	@Autowired
+	private ClientController clientController;
+	
+	@Autowired
+	private SalesController salesController;
+	
+	
+	
+	@Autowired
 	private RawMaterialStarcoController rawMaterialStarcoController;
 
 	public void showRawMaterials() {
@@ -60,6 +69,16 @@ public class RawMaterialController {
 		}
 		System.out.println("Listing Raw Materials");
 	}
+	
+	public void updateAll(){
+		showRawMaterials();
+		productController.showfinishedGoods();
+		rawMaterialStarcoController.fetchRawMaterialStarco();
+		clientController.fetchClients();
+		salesController.fetchSalesForToday();
+		
+		
+	}
 
 	public void addRawMaterial() {
 
@@ -71,6 +90,12 @@ public class RawMaterialController {
 					null,
 					new FacesMessage(FacesMessage.SEVERITY_INFO, "Info",
 							"Raw Materials Added"));
+		}catch (ConstraintViolationException e) {
+
+			FacesContext.getCurrentInstance().addMessage(
+					null,
+					new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error",
+							"Raw Material with same name and same Vendor already present"));
 		} catch (Exception e) {
 
 			FacesContext.getCurrentInstance().addMessage(
@@ -113,10 +138,10 @@ public class RawMaterialController {
 								if(productReciepeUpdate){
 										product.setMaterialCost(reciepeCost/totalQuantity);
 										float totalCost = product.getMaterialCost() + product.getCostOfEnergyAndLabor() + product.getCostOfPacking();
-										float priceForExporter = (float) (totalCost * 1.25);
-										float priceForDealer = (float) (totalCost * 0.25);
-										float priceForCustomer = (float) (totalCost * 0.85);
-										float priceInCash = (float) (totalCost * 1.85);
+										float priceForExporter = (float) (totalCost * commissionPriceForExporter);
+										float priceForDealer = (float) (totalCost * commissionPriceForDealer);
+										float priceForCustomer = (float) (totalCost * commissionPriceForCustomer);
+										float priceInCash = (float) (totalCost * commissionPriceInCash);
 										
 										product.setTotalCost(totalCost);
 										product.setPriceForExporter(priceForExporter);

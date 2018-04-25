@@ -11,7 +11,7 @@ public interface RawMaterialDao {
 
 	List<RawMaterials> listOfRawMaterials() throws Exception;
 
-	void addRawMaterial(RawMaterials rawMaterials) throws Exception;
+	void addRawMaterial(RawMaterials rawMaterials) throws ConstraintViolationException,Exception;
 
 	List<String> getUniqueRawMaterialList(String query) throws Exception;
 
