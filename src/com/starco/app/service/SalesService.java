@@ -10,4 +10,10 @@ public interface SalesService {
 
 	public List<Sales> fetchSalesForToday() throws Exception;
 
+	List<Sales> fetchSalesForMonth() throws Exception;
+
+	List<Sales> fetchSalesForQuater() throws Exception;
+
+	List<Sales> fetchSalesForYear() throws Exception;
+
 }

@@ -37,6 +37,21 @@ public class SalesServiceImpl implements SalesService {
 		return salesDao.fetchSalesForToday();
 	}
 
+	@Override
+	public List<Sales> fetchSalesForMonth() throws Exception {
+		return salesDao.fetchSalesForMonth();
+	}
+
+	@Override
+	public List<Sales> fetchSalesForQuater() throws Exception {
+		return salesDao.fetchSalesForQuater();
+	}
+
+	@Override
+	public List<Sales> fetchSalesForYear() throws Exception {
+		return salesDao.fetchSalesForYear();
+	}
+
 	
 	
 	

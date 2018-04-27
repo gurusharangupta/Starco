@@ -14,6 +14,9 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
+
 @Entity
 @Table(name="CLIENT_PRODDUCT_STARCO")
 public class ClientProductStarco implements Serializable{
@@ -85,6 +88,14 @@ public class ClientProductStarco implements Serializable{
 
 	public void setClient(Client client) {
 		this.client = client;
+	}
+
+	public List<Sales> getSalesList() {
+		return salesList;
+	}
+
+	public void setSalesList(List<Sales> salesList) {
+		this.salesList = salesList;
 	}
 	
 	

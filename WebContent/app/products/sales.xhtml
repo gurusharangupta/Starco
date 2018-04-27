@@ -15,27 +15,23 @@
 				<tr>
 				<td>
 				<p:commandButton
-									actionListener="#{clientController.addClient()}"
-									action="#{clientController.fetchClients()}" 
-									value="Todays  Sale" />
+									action="#{salesController.fetchSalesForToday()}" 
+									value="Todays  Sale" update="salesDatabase"/>
 									</td>
 									<td>
 				<p:commandButton
-									actionListener="#{clientController.addClient()}"
-									action="#{clientController.fetchClients()}" 
-									value="Monthly  Sale" />
+								action="#{salesController.fetchSalesForMonth()}" 
+									value="Monthly  Sale" update="salesDatabase"/>
 									</td>
 									<td>
 				<p:commandButton
-									actionListener="#{clientController.addClient()}"
-									action="#{clientController.fetchClients()}" 
-									value="Quaterly  Sale" />
+									action="#{salesController.fetchSalesForQuater()}" 
+									value="Quaterly  Sale" update="salesDatabase"/>
 									</td>
 									<td>
 				<p:commandButton
-									actionListener="#{clientController.addClient()}"
-									action="#{clientController.fetchClients()}" 
-									value="Yearly  Sale" />
+									action="#{salesController.fetchSalesForYear()}" 
+									value="Yearly  Sale" update="salesDatabase"/>
 									</td>
 									
 							</tr>		

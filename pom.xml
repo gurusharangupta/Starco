@@ -15,11 +15,11 @@
 		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 
 		<!-- Spring -->
-		<spring-framework.version>4.2.0.RELEASE</spring-framework.version>
+		<spring-framework.version>4.3.7.RELEASE</spring-framework.version>
 		<aspectj.version>1.7.4</aspectj.version>
 
 		<!-- Hibernate / JPA -->
-		<hibernate.version>4.3.5.Final</hibernate.version>
+		<hibernate.version>5.2.12.Final</hibernate.version>
 
 		<!-- JSF Version -->
 		<jsf.version>2.2.10</jsf.version>

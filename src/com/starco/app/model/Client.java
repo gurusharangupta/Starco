@@ -13,6 +13,9 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
+
 @Entity
 @Table(name="CLIENT")
 public class Client implements Serializable{
@@ -31,9 +34,11 @@ public class Client implements Serializable{
 	private String name;
 	
 	@OneToMany(mappedBy="client",cascade=CascadeType.ALL,fetch=FetchType.EAGER)
+	@Fetch(FetchMode.SELECT)
 	private List<ClientProductStarco> clientProductList;
 	
 	@OneToMany(mappedBy="client",cascade=CascadeType.ALL,fetch=FetchType.EAGER)
+	@Fetch(FetchMode.SELECT)
 	private List<Sales> salesList;
 	
 	@Column

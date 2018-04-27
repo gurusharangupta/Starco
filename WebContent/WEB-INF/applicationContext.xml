@@ -30,7 +30,7 @@
 
 	<!-- Session Factory Declaration -->
 	<bean id="SessionFactory"
-		class="org.springframework.orm.hibernate4.LocalSessionFactoryBean">
+		class="org.springframework.orm.hibernate5.LocalSessionFactoryBean">
 		<property name="dataSource" ref="DataSource" />
 		<!-- Either define annotated classes explicitly -->
 		<!-- <property name="annotatedClasses"> <list> <value>com.accenture.User</value> 
@@ -40,7 +40,7 @@
 		<property name="packagesToScan" value="com.starco.app.model" />
 		<property name="hibernateProperties">
 			<props>
-				<prop key="hibernate.dialect">org.hibernate.dialect.MySQLDialect</prop>
+				<prop key="hibernate.dialect">org.hibernate.dialect.MySQL55Dialect</prop>
 				<prop key="hibernate.show_sql">true</prop>
 				<prop key="hibernate.hbm2ddl.auto">update</prop>
 			</props>
@@ -52,7 +52,7 @@
 
 	<!-- Transaction Manager is defined -->
 	<bean id="txManager"
-		class="org.springframework.orm.hibernate4.HibernateTransactionManager">
+		class="org.springframework.orm.hibernate5.HibernateTransactionManager">
 		<property name="sessionFactory" ref="SessionFactory" />
 	</bean>
 

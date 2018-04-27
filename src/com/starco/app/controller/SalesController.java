@@ -62,6 +62,54 @@ public class SalesController {
 		}
 		
 	}
+	
+	public void fetchSalesForMonth(){
+		try {
+			salesList = salesService.fetchSalesForMonth();
+		} catch (Exception e) {
+			FacesContext
+			.getCurrentInstance()
+			.addMessage(
+					null,
+					new FacesMessage(FacesMessage.SEVERITY_ERROR,
+							"Error",
+							"Error occured while fetching sales list"));
+			e.printStackTrace();
+		}
+		
+	}
+	
+	public void fetchSalesForQuater(){
+		try {
+			salesList = salesService.fetchSalesForQuater();
+		} catch (Exception e) {
+			FacesContext
+			.getCurrentInstance()
+			.addMessage(
+					null,
+					new FacesMessage(FacesMessage.SEVERITY_ERROR,
+							"Error",
+							"Error occured while fetching sales list"));
+			e.printStackTrace();
+		}
+		
+	}
+	
+	public void fetchSalesForYear(){
+		try {
+			salesList = salesService.fetchSalesForYear();
+		} catch (Exception e) {
+			FacesContext
+			.getCurrentInstance()
+			.addMessage(
+					null,
+					new FacesMessage(FacesMessage.SEVERITY_ERROR,
+							"Error",
+							"Error occured while fetching sales list"));
+			e.printStackTrace();
+		}
+		
+	}
 
 	public void updateSales() {
 

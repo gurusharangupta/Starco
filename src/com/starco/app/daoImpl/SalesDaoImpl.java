@@ -1,6 +1,7 @@
 package com.starco.app.daoImpl;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.List;
 
 import org.hibernate.Criteria;
@@ -32,12 +33,62 @@ public class SalesDaoImpl implements SalesDao {
 	@Override
 	public List<Sales> fetchSalesForToday() throws Exception {
 
-		Query query = sessionFactory.getCurrentSession().createQuery(
-				"from Sales");
+		
+		Query query = sessionFactory.getCurrentSession().getNamedQuery("findSalesForToday")
+		        .setParameter("todaysDate", LocalDate.now());
+		
+		
+		
+		List<Sales> salesList = (List<Sales>) query.list();
+		return salesList;
+	}
+
+	@Override
+	public List<Sales> fetchSalesForMonth() throws Exception {
+		Query query = sessionFactory.getCurrentSession().getNamedQuery("findSalesForMonth")
+		        .setParameter("todaysDate", LocalDate.now())
+		        .setParameter("beforeMonthDate", LocalDate.now().minusDays(30));
+		
+		
+		
+		List<Sales> salesList = (List<Sales>) query.list();
+		return salesList;
+	}
+
+	@Override
+	public List<Sales> fetchSalesForQuater() throws Exception {
+		Query query = sessionFactory.getCurrentSession().getNamedQuery("findSalesForQuater")
+		        .setParameter("todaysDate", LocalDate.now())
+		        .setParameter("beforeQuaterDate", LocalDate.now().minusDays(90));
+		
+		
+		
+		List<Sales> salesList = (List<Sales>) query.list();
+		return salesList;
+	}
+
+	@Override
+	public List<Sales> fetchSalesForYear() throws Exception {
+		Query query = sessionFactory.getCurrentSession().getNamedQuery("findSalesForYear")
+		        .setParameter("todaysDate", LocalDate.now())
+		        .setParameter("beforeYearDate", LocalDate.now().minusDays(365));
+		
+		
+		
 		List<Sales> salesList = (List<Sales>) query.list();
 		return salesList;
 	}
 	
 	
 	
+	/*@Override
+	public List<Sales> fetchSalesForToday() throws Exception {
+Query query = sessionFactory.getCurrentSession().createQuery(
+				"from Sales");
+		Criteria criteria = sessionFactory.getCurrentSession().createCriteria(Sales.class);
+		Criterion c1 = Restrictions.ilike("saleDate", LocalDate.now());
+		criteria.add(c1);
+		List<Sales> salesList = (List<Sales>) criteria.list();
+		return salesList;
+	}*/
 }

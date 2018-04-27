@@ -34,7 +34,7 @@
 						<tr>
 							<td></td>
 							<td><p:dataTable id="clientProductStarco"
-									style="width:325px;" var="clientProduct"
+									style="width:425px;" var="clientProduct"
 									value="#{salesController.sales.client.clientProductList}"
 									selection="#{salesController.sales.clientProductStarco}"
 									rowKey="#{clientProduct.id}">
@@ -99,8 +99,8 @@
 						</tr>
 
 						<tr>
-							<td><p:outputLabel value="SGST" /></td>
-							<td><p:outputLabel value="#{salesController.sales.sGST}" /></td>
+							<td><p:outputLabel value="SGST" rendered="#{salesController.sales.clientProductStarco.client.ogs eq false}" /></td>
+							<td><p:outputLabel value="#{salesController.sales.sGST}" rendered="#{salesController.sales.clientProductStarco.client.ogs eq false}" /></td>
 
 						</tr>
 
