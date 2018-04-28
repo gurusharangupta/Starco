@@ -1,0 +1,48 @@
+<f:view xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:ng="http://xmlns.jcp.org/jsf/passthrough"
+	xmlns:p="http://primefaces.org/ui">
+
+	<h:body>
+		<ui:composition template="../common.xhtml">
+			<ui:define name="content">
+
+
+				<h:form>
+					<p:dataTable var="finishedproduct" id="finishedproductDatabase"
+						value="#{productController.listFinishedGoods}">
+						<p:column headerText="Name">
+							<h:outputText value="#{finishedproduct.productName}" />
+						</p:column>
+
+						<p:column headerText="Price">
+							<h:outputText value="#{finishedproduct.price}" />
+						</p:column>
+						<p:column headerText="MOQ">
+							<h:outputText value="#{finishedproduct.moq}" />
+						</p:column>
+
+						<p:column headerText="Total Cost">
+							<h:outputText value="#{finishedproduct.totalCost}" />
+						</p:column>
+
+						<p:column headerText="Price For Customer">
+							<h:outputText value="#{finishedproduct.priceForCustomer}" />
+						</p:column>
+						<f:facet name="footer">
+							<p:commandButton update="finishedproductDatabase"
+								value="Refresh List"
+								action="#{productController.showfinishedGoods()}" />
+						</f:facet>
+					</p:dataTable>
+				</h:form>
+
+
+			</ui:define>
+		</ui:composition>
+
+	</h:body>
+</f:view>
+

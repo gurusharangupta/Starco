@@ -22,7 +22,7 @@
 									completeMethod="#{rawMaterialStarcoController.completeText}" /></td>
 							<td><p:commandButton
 									action="#{rawMaterialStarcoController.searchRawMaterial()}"
-									value="Search Raw Material" update="rawMaterialDatatable vendorName rawMaterialName vendorPrice vendorMOQ" /></td>
+									value="Search Raw Material" update="rawMaterialDatatable vendorName rawMaterialName vendorPrice vendorMOQ vendorActual" /></td>
 						</tr>
 					</table>
 
@@ -56,6 +56,14 @@
 									value="#{rawMaterialStarcoController.rawMaterialStarco.rawMaterials.price}" /></td>
 
 						</tr>
+						<tr>
+
+							<td>Current Quantity </td>
+
+							<td><p:inputText id="vendorActual"
+									value="#{rawMaterialStarcoController.rawMaterialStarco.currentQuantity}" /></td>
+
+						</tr>
 
 						<tr>
 
@@ -65,6 +73,7 @@
 									value="#{rawMaterialStarcoController.rawMaterialStarco.moq}" /></td>
 
 						</tr>
+						
 					</table>
 
 

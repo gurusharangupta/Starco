@@ -19,39 +19,37 @@ import com.starco.app.model.RawMaterialsStarco;
 import com.starco.app.model.Vendor;
 import com.starco.app.service.RawMaterialService;
 
-
 @ManagedBean(name = "rawMaterialStarcoController")
 @ViewScoped
 @Component
 public class RawMaterialStarcoController {
 
-	
-	private RawMaterials rawMaterials = new RawMaterials();
+	private RawMaterials selectedRawMaterial = new RawMaterials();
 	private RawMaterialsStarco rawMaterialStarco = new RawMaterialsStarco();
 	private List<RawMaterials> listSearchedRawMaterials = new ArrayList<>();
 	private List<RawMaterialsStarco> listRawMaterialsStarco = new ArrayList<>();
 	private String rawMaterial;
-	
+
 	@Autowired
 	private RawMaterialService rawMaterialService;
-	
+
 	@Autowired
 	private VendorController vendorController;
-	
+
 	@Autowired
 	private RawMaterialController rawMaterialController;
-	
+
 	@PostConstruct
 	public void init() {
 		fetchRawMaterialStarco();
 
 	}
-	
-	
-	public void fetchRawMaterialStarco(){
-		
+
+	public void fetchRawMaterialStarco() {
+
 		try {
-			listRawMaterialsStarco = rawMaterialService.fetchRawMaterialStarco();
+			listRawMaterialsStarco = rawMaterialService
+					.fetchRawMaterialStarco();
 		} catch (Exception e) {
 			FacesContext.getCurrentInstance().addMessage(
 					null,
@@ -60,33 +58,35 @@ public class RawMaterialStarcoController {
 			e.printStackTrace();
 		}
 	}
-	
+
 	public List<String> completeText(String query) {
 		List<String> results = new ArrayList<>();
-		try{
+		try {
 			results = rawMaterialService.getUniqueRawMaterialList(query);
-		}catch(Exception e){
+		} catch (Exception e) {
 			FacesContext.getCurrentInstance().addMessage(
 					null,
 					new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error",
 							"Error occured while searching raw materials"));
 			e.printStackTrace();
 		}
-        return results;
-    }
-	
-	public void searchRawMaterial(){
+		return results;
+	}
+
+	public void searchRawMaterial() {
 		try {
-			rawMaterialStarco = rawMaterialService.getCurrentVendorForRawMaterial(rawMaterial);
-			rawMaterials = rawMaterialStarco.getRawMaterials();
-			listSearchedRawMaterials = rawMaterialService.getNamedRawMaterialList(rawMaterial);
-			
-			if(listSearchedRawMaterials.size() == 0){
+			rawMaterialStarco = rawMaterialService
+					.getCurrentVendorForRawMaterial(rawMaterial);
+			selectedRawMaterial = rawMaterialStarco.getRawMaterials();
+			listSearchedRawMaterials = rawMaterialService
+					.getNamedRawMaterialList(rawMaterial);
+
+			if (listSearchedRawMaterials.size() == 0) {
 				FacesContext.getCurrentInstance().addMessage(
 						null,
 						new FacesMessage(FacesMessage.SEVERITY_INFO, "Info",
 								"No such raw material Found"));
-				
+
 			}
 		} catch (Exception e) {
 			FacesContext.getCurrentInstance().addMessage(
@@ -95,38 +95,51 @@ public class RawMaterialStarcoController {
 							"Error occured while searching raw materials"));
 			e.printStackTrace();
 		}
-		
+
 	}
 
-	public void updateCurrentVendor(){
-
-		try {
-			rawMaterialService.updateCurrentVendorForRawMaterial(rawMaterials,rawMaterialStarco.getMoq());
-			rawMaterialStarco = rawMaterialService.getCurrentVendorForRawMaterial(rawMaterial);
-			vendorController.showVendors();
-			rawMaterialController.showRawMaterials();
-			fetchRawMaterialStarco();
-			FacesContext.getCurrentInstance().addMessage(
-					null,
-					new FacesMessage(FacesMessage.SEVERITY_INFO, "Info",
-							"Updated Current Vendor for Raw Material"));
-		}catch (ConstraintViolationException e) {
-			FacesContext.getCurrentInstance().addMessage(
-					null,
-					new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error",
-							"Vendor already in use for given raw Material"));
-			e.printStackTrace();
-		} catch (Exception e) {
-			FacesContext.getCurrentInstance().addMessage(
-					null,
-					new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error",
-							"Error occured while Updating raw materials"));
-			e.printStackTrace();
+	public void updateCurrentVendor() {
+		if (selectedRawMaterial != null) {
+			try {
+				rawMaterialService.updateCurrentVendorForRawMaterial(
+						selectedRawMaterial, rawMaterialStarco);
+				rawMaterialStarco = rawMaterialService
+						.getCurrentVendorForRawMaterial(rawMaterial);
+				vendorController.showVendors();
+				rawMaterialController.showRawMaterials();
+				fetchRawMaterialStarco();
+				FacesContext.getCurrentInstance().addMessage(
+						null,
+						new FacesMessage(FacesMessage.SEVERITY_INFO, "Info",
+								"Updated Current Vendor for Raw Material"));
+			} catch (ConstraintViolationException e) {
+				FacesContext
+						.getCurrentInstance()
+						.addMessage(
+								null,
+								new FacesMessage(FacesMessage.SEVERITY_ERROR,
+										"Error",
+										"Vendor already in use for given raw Material"));
+				e.printStackTrace();
+			} catch (Exception e) {
+				FacesContext.getCurrentInstance().addMessage(
+						null,
+						new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error",
+								"Error occured while Updating raw materials"));
+				e.printStackTrace();
+			}
+		} else {
+			FacesContext
+					.getCurrentInstance()
+					.addMessage(
+							null,
+							new FacesMessage(FacesMessage.SEVERITY_ERROR,
+									"Error",
+									"Please select a Raw Material from list to update"));
 		}
-		
-		
+
 	}
-	
+
 	public RawMaterialsStarco getRawMaterialStarco(Integer id) {
 		if (id == null) {
 			throw new IllegalArgumentException("no id provided");
@@ -140,14 +153,12 @@ public class RawMaterialStarcoController {
 	}
 
 	public RawMaterials getRawMaterials() {
-		return rawMaterials;
+		return selectedRawMaterial;
 	}
-
 
 	public void setRawMaterials(RawMaterials rawMaterials) {
-		this.rawMaterials = rawMaterials;
+		this.selectedRawMaterial = rawMaterials;
 	}
-
 
 	public String getRawMaterial() {
 		return rawMaterial;

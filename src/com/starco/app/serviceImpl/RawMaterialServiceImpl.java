@@ -44,12 +44,10 @@ public class RawMaterialServiceImpl implements RawMaterialService {
 	}
 
 	@Override
-	public void updateCurrentVendorForRawMaterial(RawMaterials rawMaterials,int moq)
+	public void updateCurrentVendorForRawMaterial(RawMaterials rawMaterials,RawMaterialsStarco rawMaterialsStarco)
 			throws ConstraintViolationException,Exception {
-		RawMaterialsStarco rawMaterialsStarco = new  RawMaterialsStarco();
-		rawMaterialsStarco.setRawMaterials(rawMaterials);
-		rawMaterialsStarco.setMoq(moq);
 		
+		rawMaterialsStarco.setRawMaterials(rawMaterials);
 		rawMaterialDao.updateCurrentVendorForRawMaterial(rawMaterialsStarco);
 
 	}

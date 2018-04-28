@@ -15,6 +15,7 @@ import javax.faces.event.ValueChangeEvent;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import com.starco.app.model.ManufacturedProduct;
 import com.starco.app.model.Packing;
 import com.starco.app.model.Product;
 import com.starco.app.model.ProductRecipe;
@@ -34,6 +35,8 @@ public class ProductController {
 	private Product product = new Product();
 
 	private List<ProductRecipe> listProductReciepe = new ArrayList<>();
+	
+	private ManufacturedProduct manufacturedProduct = new ManufacturedProduct();
 
 	@PostConstruct
 	public void init() {
@@ -193,6 +196,14 @@ public class ProductController {
 
 	public void setListFinishedGoods(List<Product> listFinishedGoods) {
 		this.listFinishedGoods = listFinishedGoods;
+	}
+
+	public ManufacturedProduct getManufacturedProduct() {
+		return manufacturedProduct;
+	}
+
+	public void setManufacturedProduct(ManufacturedProduct manufacturedProduct) {
+		this.manufacturedProduct = manufacturedProduct;
 	}
 
 }

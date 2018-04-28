@@ -65,6 +65,7 @@ public class RawMaterialDaoImpl implements RawMaterialDao{
 		RawMaterialsStarco currentRawMaterialStarco =  getCurrentVendorForRawMaterial(rawMaterialsStarco.getRawMaterials().getName());
 		if(currentRawMaterialStarco.getRawMaterials()!=null && currentRawMaterialStarco.getRawMaterials().getName()!=null && !currentRawMaterialStarco.getRawMaterials().getName().isEmpty()){
 			currentRawMaterialStarco.setMoq(rawMaterialsStarco.getMoq());
+			currentRawMaterialStarco.setCurrentQuantity(rawMaterialsStarco.getCurrentQuantity());
 			currentRawMaterialStarco.setRawMaterials(rawMaterialsStarco.getRawMaterials());
 			sessionFactory.getCurrentSession().update(currentRawMaterialStarco);
 			sessionFactory.getCurrentSession().flush();

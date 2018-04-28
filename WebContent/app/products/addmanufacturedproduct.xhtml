@@ -1,0 +1,89 @@
+<f:view xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:ng="http://xmlns.jcp.org/jsf/passthrough"
+	xmlns:p="http://primefaces.org/ui">
+
+	<h:body>
+		<ui:composition template="../common.xhtml">
+			<ui:define name="content">
+
+
+				<h:form>
+
+					<table style="border: none;">
+
+						<tr>
+
+							<td>Product Name</td>
+							<td><p:selectOneMenu id="productName"
+									value="#{productController.manufacturedProduct.product}"
+									converter="productConverter" style="width:175px;">
+
+									<f:selectItems value="#{productController.listFinishedGoods}"
+										var="product" itemValue="#{product}"
+										itemLabel="#{product.productName}" />
+								</p:selectOneMenu></td>
+
+						</tr>
+
+						<tr>
+
+							<td>Quantity</td>
+							<td><p:inputText value="#{productController.manufacturedProduct.quantity}" /></td>
+
+						</tr>
+
+						<tr>
+
+							<td>Yield</td>
+							<td><p:inputText value="#{productController.manufacturedProduct.yield}" /></td>
+
+						</tr>
+
+						<tr>
+
+							<td>Place</td>
+							<td><p:selectOneMenu id="place"
+									value="#{productController.manufacturedProduct.place}" style="width:175px;">
+
+									<f:selectItem itemLabel="Vatva" itemValue="Vatva"/>
+									<f:selectItem itemLabel="Piplej" itemValue="Peplej" />
+									</p:selectOneMenu></td>
+
+						</tr>
+						
+						<tr>
+
+							<td>Supervisor</td>
+							<td><p:selectOneMenu id="supervisor"
+									value="#{productController.manufacturedProduct.supervisor}" style="width:175px;">
+
+									<f:selectItem itemLabel="Mithlesh" itemValue="Mithlesh"/>
+									<f:selectItem itemLabel="Om Prakash" itemValue="Om Prakash" />
+									</p:selectOneMenu></td>
+
+						</tr>
+
+						<tr>
+
+							<td><p:commandButton
+									 value="Add Manufactured Product" /></td>
+							<td><p:commandButton type="reset" value="Reset" /></td>
+
+						</tr>
+
+
+
+					</table>
+
+				</h:form>
+
+
+			</ui:define>
+		</ui:composition>
+
+	</h:body>
+</f:view>
+

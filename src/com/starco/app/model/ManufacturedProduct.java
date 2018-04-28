@@ -9,13 +9,13 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
+
 @Entity
-@Table(name="PRODUCT_RECIPE")
-public class ProductRecipe implements Serializable{
+@Table(name="MANUFACTURED_PRODUCT")
+public class ManufacturedProduct implements Serializable{
 
 	/**
 	 * 
@@ -28,16 +28,25 @@ public class ProductRecipe implements Serializable{
 	@Column
 	private int id;
 	
-	@ManyToOne(cascade = CascadeType.REMOVE,fetch=FetchType.EAGER)
-	@JoinColumn(name="rawmaterialstarco_id")
-	private RawMaterialsStarco rawMaterialsStarco;
+	
+	@OneToOne(cascade = CascadeType.PERSIST, fetch = FetchType.EAGER)
+	@JoinColumn(name="product_id")
+	private Product product;
 	
 	@Column
 	private float quantity;
 	
-	@ManyToOne(cascade = CascadeType.REMOVE,fetch=FetchType.EAGER)
-	@JoinColumn(name="product_id")
-	private Product product;
+	@Column
+	private float yield;
+	
+	@Column
+	private String place;
+	
+	@Column
+	private String supervisor;
+	
+	@Column
+	private String batchNumber;
 
 	public int getId() {
 		return id;
@@ -46,16 +55,6 @@ public class ProductRecipe implements Serializable{
 	public void setId(int id) {
 		this.id = id;
 	}
-
-	public RawMaterialsStarco getRawMaterialsStarco() {
-		return rawMaterialsStarco;
-	}
-
-	public void setRawMaterialsStarco(RawMaterialsStarco rawMaterialsStarco) {
-		this.rawMaterialsStarco = rawMaterialsStarco;
-	}
-
-	
 
 	public Product getProduct() {
 		return product;
@@ -72,7 +71,42 @@ public class ProductRecipe implements Serializable{
 	public void setQuantity(float quantity) {
 		this.quantity = quantity;
 	}
+
+
+	public String getPlace() {
+		return place;
+	}
+
+	public void setPlace(String place) {
+		this.place = place;
+	}
+
+	public String getSupervisor() {
+		return supervisor;
+	}
+
+	public void setSupervisor(String supervisor) {
+		this.supervisor = supervisor;
+	}
+
+	public String getBatchNumber() {
+		return batchNumber;
+	}
+
+	public void setBatchNumber(String batchNumber) {
+		this.batchNumber = batchNumber;
+	}
+
+	public float getYield() {
+		return yield;
+	}
+
+	public void setYield(float yield) {
+		this.yield = yield;
+	}
 	
 	
 	
+	
+
 }

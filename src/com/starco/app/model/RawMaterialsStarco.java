@@ -44,6 +44,9 @@ public class RawMaterialsStarco implements Serializable{
 	
 	@Column
 	private int moq;
+	
+	@Column
+	private float currentQuantity;
 
 	public int getId() {
 		return id;
@@ -75,6 +78,14 @@ public class RawMaterialsStarco implements Serializable{
 
 	public void setProductRecipe(List<ProductRecipe> productRecipe) {
 		this.productRecipe = productRecipe;
+	}
+
+	public float getCurrentQuantity() {
+		return currentQuantity;
+	}
+
+	public void setCurrentQuantity(float currentQuantity) {
+		this.currentQuantity = currentQuantity;
 	}
 
 	

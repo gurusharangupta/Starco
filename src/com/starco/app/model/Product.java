@@ -10,6 +10,7 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -42,6 +43,9 @@ public class Product implements Serializable{
 	@OneToMany(mappedBy="product",cascade=CascadeType.ALL,fetch=FetchType.EAGER)
 	private Set<ClientProductStarco> clientProductStarcoList;
 	
+	
+	@OneToOne(mappedBy="product",cascade= CascadeType.REMOVE)
+	private ManufacturedProduct manufacturedProduct;
 	
 	@Column
 	private float materialCost;
@@ -155,6 +159,12 @@ public class Product implements Serializable{
 	public void setClientProductStarcoList(
 			Set<ClientProductStarco> clientProductStarcoList) {
 		this.clientProductStarcoList = clientProductStarcoList;
+	}
+	public ManufacturedProduct getManufacturedProduct() {
+		return manufacturedProduct;
+	}
+	public void setManufacturedProduct(ManufacturedProduct manufacturedProduct) {
+		this.manufacturedProduct = manufacturedProduct;
 	}
 	
 }
