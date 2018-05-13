@@ -10,4 +10,6 @@ public interface PackingDao {
 	void addPacking(Packing packing) throws Exception;
 
 	List<Packing> listTypeOfPacking() throws Exception;
+
+	void updatePacking(Packing packing) throws Exception;
 }

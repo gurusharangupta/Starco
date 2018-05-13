@@ -32,5 +32,12 @@ public class PackingDaoImpl implements PackingDao{
 		return packingList;
 	}
 
+	@Override
+	public void updatePacking(Packing updatedPacking) throws Exception{
+	
+		sessionFactory.getCurrentSession().update(updatedPacking);
+		
+	}
+
 	
 }

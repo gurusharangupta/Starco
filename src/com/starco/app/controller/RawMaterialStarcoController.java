@@ -101,13 +101,11 @@ public class RawMaterialStarcoController {
 	public void updateCurrentVendor() {
 		if (selectedRawMaterial != null) {
 			try {
-				rawMaterialService.updateCurrentVendorForRawMaterial(
-						selectedRawMaterial, rawMaterialStarco);
+				rawMaterialStarco.setRawMaterials(selectedRawMaterial);
+				rawMaterialService.updateCurrentVendorForRawMaterial(rawMaterialStarco);
 				rawMaterialStarco = rawMaterialService
 						.getCurrentVendorForRawMaterial(rawMaterial);
-				vendorController.showVendors();
-				rawMaterialController.showRawMaterials();
-				fetchRawMaterialStarco();
+				rawMaterialController.updateAll();
 				FacesContext.getCurrentInstance().addMessage(
 						null,
 						new FacesMessage(FacesMessage.SEVERITY_INFO, "Info",

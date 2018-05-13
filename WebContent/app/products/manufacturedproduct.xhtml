@@ -11,30 +11,59 @@
 
 
 				<h:form>
-					<p:dataTable var="finishedproduct" id="finishedproductDatabase"
-						value="#{productController.listFinishedGoods}">
-						<p:column headerText="Name">
-							<h:outputText value="#{finishedproduct.productName}" />
+				<table>
+				<tr>
+				<td>
+				<p:commandButton
+									action="#{productController.fetchManufacturedProductForToday()}" 
+									value="Todays  Manufacture" update="manufacturedProductDatabase"/>
+									</td>
+									<td>
+				<p:commandButton
+								action="#{productController.fetchManufacturedProductForMonth()}" 
+									value="Monthly  Manufacture" update="manufacturedProductDatabase"/>
+									</td>
+									<td>
+				<p:commandButton
+									action="#{productController.fetchManufacturedProductForQuater()}" 
+									value="Quaterly  Manufacture" update="manufacturedProductDatabase"/>
+									</td>
+									<td>
+				<p:commandButton
+									action="#{productController.fetchManufacturedProductForYear()}" 
+									value="Yearly  Manufacture" update="manufacturedProductDatabase"/>
+									</td>
+									
+							</tr>		
+									</table>
+					<p:dataTable id="manufacturedProductDatabase" var="manufacturedProduct"
+						value="#{productController.manufacturedProductList}">
+						<p:column headerText="Manufactured Product">
+							<h:outputText value="#{manufacturedProduct.product.productName}" />
 						</p:column>
 
-						<p:column headerText="Price">
-							<h:outputText value="#{finishedproduct.price}" />
-						</p:column>
-						<p:column headerText="MOQ">
-							<h:outputText value="#{finishedproduct.moq}" />
+						<p:column headerText="Yield">
+							<h:outputText
+								value="#{manufacturedProduct.yield}" />
 						</p:column>
 
-						<p:column headerText="Total Cost">
-							<h:outputText value="#{finishedproduct.totalCost}" />
+						<p:column headerText="Place">
+							<h:outputText value="#{manufacturedProduct.place}" />
 						</p:column>
 
-						<p:column headerText="Price For Customer">
-							<h:outputText value="#{finishedproduct.priceForCustomer}" />
+						<p:column headerText="Bactch Number">
+							<h:outputText value="#{manufacturedProduct.batchNumber}" />
 						</p:column>
+						<p:column headerText="Supervisor">
+							<h:outputText value="#{manufacturedProduct.supervisor}" />
+						</p:column>
+						<p:column headerText="ManufacturedProduct Date">
+							<h:outputText value="#{manufacturedProduct.manufactureDate}" />
+						</p:column>
+
+
 						<f:facet name="footer">
-							<p:commandButton update="finishedproductDatabase"
-								value="Refresh List"
-								action="#{productController.showfinishedGoods()}" />
+
 						</f:facet>
 					</p:dataTable>
 				</h:form>

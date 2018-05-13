@@ -10,7 +10,7 @@
 			<ui:define name="content">
 
 
-				<h:form>
+				<h:form id="manufactureForm">
 
 					<table style="border: none;">
 
@@ -65,11 +65,18 @@
 									</p:selectOneMenu></td>
 
 						</tr>
+						
+						<tr>
+
+							<td>Manufacture Date</td>
+							<td><p:calendar id="button" value="#{productController.date}" showOn="button" /></td>
+
+						</tr>
 
 						<tr>
 
-							<td><p:commandButton
-									 value="Add Manufactured Product" /></td>
+							<td><p:commandButton action="#{productController.addManufacturedProduct()}"
+									 value="Add Manufactured Product" update="manufactureForm"/></td>
 							<td><p:commandButton type="reset" value="Reset" /></td>
 
 						</tr>

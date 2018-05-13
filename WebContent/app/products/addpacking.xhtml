@@ -44,6 +44,13 @@
 						
 						<tr>
 
+							<td>Quantity</td>
+							<td><p:inputText value="#{packingController.packing.quantity}"/></td>
+
+						</tr>
+						
+						<tr>
+
 							<td><p:commandButton actionListener="#{packingController.addNewPacking()}" action="#{packingController.showTypeOfPacking()}" value="Add New Packing"/></td>
 							<td><p:commandButton type="reset" value="Reset"/></td>
 

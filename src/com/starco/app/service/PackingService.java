@@ -11,4 +11,6 @@ public interface PackingService {
 
 	List<Packing> listTypeOfPacking() throws Exception;
 	
+	void updatePacking(Packing packing) throws Exception;
+	
 }

@@ -17,7 +17,7 @@ public interface RawMaterialService {
 	
 	List<RawMaterials> getNamedRawMaterialList(String rawMaterial) throws Exception;
 
-	void updateCurrentVendorForRawMaterial(RawMaterials rawMaterials, RawMaterialsStarco rawMaterialStarco) throws ConstraintViolationException,Exception;
+	void updateCurrentVendorForRawMaterial(RawMaterialsStarco rawMaterialStarco) throws ConstraintViolationException,Exception;
 
 	RawMaterialsStarco getCurrentVendorForRawMaterial(String rawMaterial) throws Exception;
 

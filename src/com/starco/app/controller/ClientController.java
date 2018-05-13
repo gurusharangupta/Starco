@@ -2,6 +2,7 @@ package com.starco.app.controller;
 
 import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Set;
 
@@ -32,6 +33,8 @@ public class ClientController {
 	private Client client = new Client();
 	
 	private List<ClientProductStarco> clientProductStarcoList = new ArrayList<ClientProductStarco>();
+	
+	private Set<ClientProductStarco> clientProductStarcoSet =null;
 	
 	private List<Client> clientList = null;
 	
@@ -82,7 +85,8 @@ public class ClientController {
 		}
 		clientProductStarcoList.get(clientProductStarcoList.size()-1).setClient(client);
 		if(!error){
-		client.setClientProductList(clientProductStarcoList);
+			clientProductStarcoSet = new LinkedHashSet<ClientProductStarco>(clientProductStarcoList);
+		client.setClientProductList(clientProductStarcoSet);
 		try {
 			clientService.addClient(client);
 			salesController.updateSales();
@@ -162,6 +166,15 @@ public class ClientController {
 
 	public void setClientList(List<Client> clientList) {
 		this.clientList = clientList;
+	}
+
+	public Set<ClientProductStarco> getClientProductStarcoSet() {
+		return clientProductStarcoSet;
+	}
+
+	public void setClientProductStarcoSet(
+			Set<ClientProductStarco> clientProductStarcoSet) {
+		this.clientProductStarcoSet = clientProductStarcoSet;
 	}
 
 	

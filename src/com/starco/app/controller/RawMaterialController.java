@@ -52,6 +52,9 @@ public class RawMaterialController {
 	@Autowired
 	private SalesController salesController;
 	
+	@Autowired
+	private PackingController packingController;
+	
 	
 	
 	@Autowired
@@ -73,9 +76,12 @@ public class RawMaterialController {
 	public void updateAll(){
 		showRawMaterials();
 		productController.showfinishedGoods();
+		productController.fetchManufacturedProductForToday();
 		rawMaterialStarcoController.fetchRawMaterialStarco();
 		clientController.fetchClients();
 		salesController.fetchSalesForToday();
+		packingController.showTypeOfPacking();
+		
 		
 		
 	}

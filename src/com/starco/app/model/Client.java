@@ -1,6 +1,7 @@
 package com.starco.app.model;
 
 import java.io.Serializable;
+import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Set;
 
@@ -34,8 +35,7 @@ public class Client implements Serializable{
 	private String name;
 	
 	@OneToMany(mappedBy="client",cascade=CascadeType.ALL,fetch=FetchType.EAGER)
-	@Fetch(FetchMode.SELECT)
-	private List<ClientProductStarco> clientProductList;
+	private Set<ClientProductStarco> clientProductList = new LinkedHashSet<ClientProductStarco>();
 	
 	@OneToMany(mappedBy="client",cascade=CascadeType.ALL,fetch=FetchType.EAGER)
 	@Fetch(FetchMode.SELECT)
@@ -80,13 +80,7 @@ public class Client implements Serializable{
 		this.ogs = ogs;
 	}
 
-	public List<ClientProductStarco> getClientProductList() {
-		return clientProductList;
-	}
-
-	public void setClientProductList(List<ClientProductStarco> clientProductList) {
-		this.clientProductList = clientProductList;
-	}
+	
 
 	public List<Sales> getSalesList() {
 		return salesList;
@@ -94,6 +88,14 @@ public class Client implements Serializable{
 
 	public void setSalesList(List<Sales> salesList) {
 		this.salesList = salesList;
+	}
+
+	public Set<ClientProductStarco> getClientProductList() {
+		return clientProductList;
+	}
+
+	public void setClientProductList(Set<ClientProductStarco> clientProductList) {
+		this.clientProductList = clientProductList;
 	}
 	
 	

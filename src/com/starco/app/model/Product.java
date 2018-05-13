@@ -37,6 +37,9 @@ public class Product implements Serializable{
 	@Column
 	private int moq;
 	
+	@Column
+	private float totalQuantity;
+	
 	@OneToMany(mappedBy="product",cascade=CascadeType.ALL,fetch=FetchType.EAGER)
 	private Set<ProductRecipe> productRecipe;
 	
@@ -166,5 +169,12 @@ public class Product implements Serializable{
 	public void setManufacturedProduct(ManufacturedProduct manufacturedProduct) {
 		this.manufacturedProduct = manufacturedProduct;
 	}
+	public float getTotalQuantity() {
+		return totalQuantity;
+	}
+	public void setTotalQuantity(float totalQuantity) {
+		this.totalQuantity = totalQuantity;
+	}
+	
 	
 }

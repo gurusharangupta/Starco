@@ -32,4 +32,12 @@ public class PackingServiceImpl implements PackingService {
 		return packingDao.listTypeOfPacking();
 	}
 
+	@Override
+	public void updatePacking(Packing packing) throws Exception {
+	
+
+		packingDao.updatePacking(packing);
+		
+	}
+
 }

@@ -24,10 +24,15 @@ public class SalesServiceImpl implements SalesService {
 	
 	@Autowired
 	private SalesDao salesDao;
+	
+	@Autowired
+	private PackingService packingService;
 
 	@Override
-	public void addSales(Sales sales) throws Exception {
+	public void addSales(Sales sales,Packing updatedPacking) throws Exception {
 		salesDao.addSales(sales);
+		packingService.updatePacking(updatedPacking);
+		
 		
 	}
 

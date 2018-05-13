@@ -1,6 +1,7 @@
 package com.starco.app.model;
 
 import java.io.Serializable;
+import java.time.LocalDate;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -9,10 +10,17 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
-
+@NamedQueries({
+@NamedQuery(name = "findManufacturedProductForToday", query = "FROM ManufacturedProduct WHERE manufactureDate = :todaysDate"),
+@NamedQuery(name = "findManufacturedProductForMonth", query = "FROM ManufacturedProduct WHERE manufactureDate <= :todaysDate and manufactureDate >= :beforeMonthDate"),
+@NamedQuery(name = "findManufacturedProductForQuater", query = "FROM ManufacturedProduct WHERE manufactureDate <= :todaysDate and manufactureDate >= :beforeQuaterDate"),
+@NamedQuery(name = "findManufacturedProductForYear", query = "FROM ManufacturedProduct WHERE manufactureDate <= :todaysDate and manufactureDate >= :beforeYearDate"),
+})
 @Entity
 @Table(name="MANUFACTURED_PRODUCT")
 public class ManufacturedProduct implements Serializable{
@@ -47,6 +55,9 @@ public class ManufacturedProduct implements Serializable{
 	
 	@Column
 	private String batchNumber;
+	
+	@Column
+	private LocalDate manufactureDate;
 
 	public int getId() {
 		return id;
@@ -104,6 +115,16 @@ public class ManufacturedProduct implements Serializable{
 	public void setYield(float yield) {
 		this.yield = yield;
 	}
+
+	public LocalDate getManufactureDate() {
+		return manufactureDate;
+	}
+
+	public void setManufactureDate(LocalDate manufactureDate) {
+		this.manufactureDate = manufactureDate;
+	}
+
+	
 	
 	
 	

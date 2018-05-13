@@ -49,8 +49,6 @@ public class SalesDaoImpl implements SalesDao {
 		        .setParameter("todaysDate", LocalDate.now())
 		        .setParameter("beforeMonthDate", LocalDate.now().minusDays(30));
 		
-		
-		
 		List<Sales> salesList = (List<Sales>) query.list();
 		return salesList;
 	}
