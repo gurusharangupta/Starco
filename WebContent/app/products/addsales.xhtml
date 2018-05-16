@@ -30,7 +30,8 @@
 						<tr>
 
 							<td>Sale Date</td>
-							<td><p:calendar id="button" value="#{salesController.date}" showOn="button" /></td>
+							<td><p:calendar id="button" value="#{salesController.date}"
+									showOn="button" /></td>
 
 						</tr>
 					</table>
@@ -60,6 +61,9 @@
 										<h:outputText value="#{clientProduct.packing.capacity}" />
 									</p:column>
 
+									<p:column headerText="Product Quantity Left">
+										<h:outputText value="#{clientProduct.product.totalQuantity}" />
+									</p:column>
 									<f:facet name="footer">
 										<p:commandButton value="Update Below Details"
 											action="#{salesController.calculateSelectedProductDetails()}"
@@ -105,8 +109,10 @@
 						</tr>
 
 						<tr>
-							<td><p:outputLabel value="SGST" rendered="#{salesController.sales.clientProductStarco.client.ogs eq false}" /></td>
-							<td><p:outputLabel value="#{salesController.sales.sGST}" rendered="#{salesController.sales.clientProductStarco.client.ogs eq false}" /></td>
+							<td><p:outputLabel value="SGST"
+									rendered="#{salesController.sales.clientProductStarco.client.ogs eq false}" /></td>
+							<td><p:outputLabel value="#{salesController.sales.sGST}"
+									rendered="#{salesController.sales.clientProductStarco.client.ogs eq false}" /></td>
 
 						</tr>
 
@@ -124,16 +130,20 @@
 							<td><p:outputLabel value="#{salesController.sales.totalGST}" /></td>
 
 						</tr>
+						
+						<tr>
+							<td><p:outputLabel value="Total GST" /></td>
+							<td><p:outputLabel value="#{salesController.sales.totalCost}" /></td>
+
+						</tr>
 
 						<tr>
-							<td><p:commandButton
-									
-									action="#{salesController.addSales()}" update="salesForm"
-									value="Add Sales" /> 
-							<td><p:commandButton type="reset"
-									value="Reset" /></td></td>
+							<td><p:commandButton action="#{salesController.addSales()}"
+									update="salesForm" value="Add Sales" />
+							<td><p:commandButton type="reset" value="Reset" /></td>
+							</td>
 						</tr>
-						
+
 					</table>
 
 				</h:form>

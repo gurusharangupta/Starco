@@ -23,6 +23,7 @@ import com.starco.app.model.Client;
 import com.starco.app.model.ClientProductStarco;
 import com.starco.app.model.ManufacturedProduct;
 import com.starco.app.model.Packing;
+import com.starco.app.model.Product;
 import com.starco.app.model.Sales;
 import com.starco.app.service.SalesService;
 
@@ -155,7 +156,7 @@ public class SalesController {
 
 	public void calculateSelectedProductDetails() {
 		
-		float cGST = 0,sGST = 0,iGST = 0,totalGST,totalAmount,carboys;
+		float cGST = 0,sGST = 0,iGST = 0,totalGST,totalAmount,carboys,totalCost=0;
 		if (sales.getQuantity() != 0
 				&& sales.getClientProductStarco()!= null && sales.getClientProductStarco().getPrice() != 0) {
 			carboys = sales.getQuantity()
@@ -170,6 +171,7 @@ public class SalesController {
 				
 				iGST = (float) (IGSTPercentage * totalAmount);
 				totalGST = sGST + iGST;
+				
 			}else{
 				sGST = (float) (SGSTPercentage * totalAmount);
 				cGST = (float) (CGSTPercentage * totalAmount);
@@ -177,7 +179,8 @@ public class SalesController {
 				
 				
 			}
-			
+			totalCost = totalGST + totalAmount;
+			sales.setTotalCost(totalCost);
 			sales.setsGST(sGST);
 			sales.setcGST(cGST);
 			sales.setiGST(iGST);
@@ -198,8 +201,17 @@ public class SalesController {
 	
 	public void addSales(){
 		try {
-			float packingQuantity=0;
+			float packingQuantity=0,leftProductQuantity=0;
 			packingQuantity = sales.getClientProductStarco().getPacking().getQuantity()-sales.getCarboys();
+			
+			leftProductQuantity = sales.getClientProductStarco().getProduct().getTotalQuantity() - sales.getQuantity();
+			
+			if(leftProductQuantity<0){
+				throw (new StarcoException(
+						"Selected Product doest not have the desired quantity left"));
+				
+				
+			}
 			
 			if(sales.getQuantity()<1){
 				throw (new StarcoException(
@@ -213,7 +225,8 @@ public class SalesController {
 				
 				
 			}
-			
+			Product updatedProduct = sales.getClientProductStarco().getProduct();
+			updatedProduct.setTotalQuantity(leftProductQuantity);
 			Packing updatedPacking = sales.getClientProductStarco().getPacking();
 			updatedPacking.setQuantity(packingQuantity);
 			calculateSelectedProductDetails();
@@ -226,7 +239,7 @@ public class SalesController {
 
 			}
 			sales.setSaleDate(saleDate);
-			salesService.addSales(sales,updatedPacking);
+			salesService.addSales(sales,updatedPacking,updatedProduct);
 			sales = new Sales();
 			updateSales();
 			rawMaterialController.updateAll();

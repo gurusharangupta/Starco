@@ -76,6 +76,9 @@ public class Sales implements Serializable{
 	
 	@Column
 	private float totalGST;
+	
+	@Column
+	private float totalCost;
 
 	public int getId() {
 		return id;
@@ -165,6 +168,14 @@ public class Sales implements Serializable{
 
 	public void setSaleDate(LocalDate saleDate) {
 		this.saleDate = saleDate;
+	}
+
+	public float getTotalCost() {
+		return totalCost;
+	}
+
+	public void setTotalCost(float totalCost) {
+		this.totalCost = totalCost;
 	}
 	
 	
